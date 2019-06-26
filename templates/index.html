@@ -1,4 +1,3 @@
-
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -29,20 +28,20 @@
             	<input type="text" class="searchInput" />
                 <input type="button" class="searchButton" onclick="add_search()" />
                 <ul class="dataList">
-                	<li>如何学好设计</li>
-                    <li>界面设计</li>
-                    <li>UI设计培训要多少钱</li>
-                    <li>设计师学习</li>
-                    <li>哪里有好的网站</li>
+                	<li>java</li>
+                    <li>linux</li>
+                    <li>python</li>
+                    <li>技术</li>
+                    <li>网站开发</li>
                 </ul>
             </div>
 
             <div class="historyArea">
             	<p class="history">
                 	<label>热门搜索：</label>
-                    {% for search_words in topn_search %}
-                        <a href="/search?q={{ search_words }}">{{ search_words }}</a>
-                    {% endfor %}
+{#                    {% for search_words in top_search %}#}
+{#                        <a href="/search?q={{ search_words }}">{{ search_words }}</a>#}
+{#                    {% endfor %}#}
                 </p>
                 <p class="history mysearch">
                 	<label>我的搜索：</label>
@@ -60,7 +59,7 @@
 
     <div class="foot">
     	<div class="wrap">
-            <div class="copyright">Copyright &copy;uimaker.com 版权所有  E-mail:admin@uimaker.com</div>
+            <div class="copyright">Copyright &copy;albert_hq.com 版权所有  E-mail:1422127065@qq.com</div>
         </div>
     </div>
 </div>
@@ -68,8 +67,8 @@
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
 <script type="text/javascript">
-    var suggest_url = "/suggest/"
-    var search_url = "/search/"
+    var suggest_url = "{% url 'suggest' %}"
+    var search_url = "{% url  'search'%}"
 
 
 	$('.searchList').on('click', '.searchItem', function(){
