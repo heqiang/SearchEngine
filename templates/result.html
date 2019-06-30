@@ -33,7 +33,7 @@
                 <ul class="subfieldContext">
                 	<li>
                     	<span class="name">伯乐在线</span>
-						<span class="unit">({{ jobbole_count }})</span>
+						<span class="unit">(13930)</span>
                     </li>
                     <li>
                     	<span class="name">知乎</span>
@@ -60,6 +60,8 @@
             	<p class="resultTotal">
                 	<span class="info">找到约&nbsp;<span class="totalResult">{{ total_nums }}</span>&nbsp;条结果(用时<span class="time">{{ last_seconds }}</span>秒)，共约<span class="totalPage">{{ page_nums }}</span>页</span>
                 </p>
+
+
                 <div class="resultList">
                     {% for hit in all_list %}
                     <div class="resultItem">
@@ -77,6 +79,7 @@
                             </div>
                             <div class="itemBody">
                                 {% autoescape off %}{{ hit.content }}{% endautoescape %}
+                                 <a  href="{{ hit.url }}">查看更多</a>
                             </div>
                             <div class="itemFoot">
                                 <span class="info">
@@ -94,6 +97,7 @@
                 <!-- 分页 -->
                 <div class="pagination ue-clear"></div>
                 <!-- 相关搜索 -->
+
                 
                 
                 
@@ -101,10 +105,12 @@
             <div class="historyArea">
             	<div class="hotSearch">
                 	<h6>热门搜索</h6>
+
                     <ul class="historyList">
                         {% for search_word in topn_search %}
-                            <li><a href="/search?q={{ search_word }}">{{ search_word }}</a></li>
+                            <li><a href="/search?q={{ search_word}}">{{ search_word }}</a></li>
                         {% endfor %}
+
                     </ul>
                 </div>
                 <div class="mySearch">
