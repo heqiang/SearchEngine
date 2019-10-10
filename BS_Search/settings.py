@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'search'
+    'search',
+    'user',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -76,11 +79,38 @@ WSGI_APPLICATION = 'BS_Search.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'bishe',
+            'USER':'root',
+            'PASSWORD':'1422127065',
+            'HOST':'localhost',
+            'PORT':'3306',
+        }
 }
+# import pymysql  # 一定要添加这两行！通过pip install pymysql！
+# pymysql.install_as_MySQLdb()
+# DATABASES = {
+#     'default': {
+#         # 数据库引擎（sqlite3/mysql/oracle等）
+#         'ENGINE': 'django.db.backends.mysql',
+#         # 数据库的名字
+#         'NAME': 'django',
+#         # 连接数据库的用户名
+#         'USER': 'root',
+#         # 连接数据库的密码
+#         'PASSWORD': '1422127065',
+#         # 数据库的主机地址
+#         'HOST': 'localhost',
+#         # 数据库的端口号
+#         'PORT': '3306'
+#     }
+# }
+
 
 
 # Password validation
@@ -105,15 +135,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

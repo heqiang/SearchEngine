@@ -5,7 +5,7 @@ from elasticsearch_dsl import DocType,Date,Nested,Boolean,\
 from elasticsearch_dsl.connections import connections
 
 from elasticsearch_dsl.analysis import CustomAnalyzer as _CustomAnalyzer
-
+from django.db  import models
 
 connections.create_connection(hosts=["localhost"])
 
@@ -42,3 +42,30 @@ class  ArticType(DocType):#继承自定义的类
          doc_type='article'#设置表名称
 if __name__ == '__main__':
      ArticType.init()
+
+
+class TechnologyType(DocType):
+    suggest = Completion(analyzer=ik_analyzer)
+    title = Text(analyzer='ik_max_word')
+    time = Date()
+    link_url = Keyword()
+    content = Text(analyzer='ik_max_word')
+    url_object_id = Keyword()
+    tag = Text(analyzer='ik_max_word')  # 标签
+    comment_num = Integer()  # 评论数
+    read_num = Integer()  # 阅读数
+    Collection_num = Integer()  # 收藏数
+    praise_num = Integer()  # 点赞数
+    source = Keyword()  # 来源
+
+    class Meta:
+        index = "technology"  # 必须小写
+        doc_type = "tec_articles"
+
+
+if __name__ == '__main__':
+    TechnologyType.init()
+
+from django.db import models
+
+# Create your models here.

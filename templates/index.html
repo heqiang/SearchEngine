@@ -98,7 +98,6 @@
                 url:suggest_url+"?s="+searchText+"&s_type="+$(".searchItem.current").attr('data-type'),
                 async: true,
                 success: function(data) {
-
                     for (var i=0;i<data.length;i++){
                         tmpHtml += '<li><a href="'+search_url+'?q='+data[i]+'">'+data[i]+'</a></li>'
                     }
