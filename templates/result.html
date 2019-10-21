@@ -28,11 +28,12 @@
     <div class="nav">
     	<ul class="searchList">
             <li class="searchItem current" data-type="article">文章</li>
-            <li class="searchItem" data-type="question">问答</li>
-            <li class="searchItem" data-type="job">职位</li>
+{#            <li class="searchItem" data-type="question">问答</li>#}
+{#            <li class="searchItem" data-type="job">职位</li>#}
             {% if request.session.is_login %}
                   <li class="searchItem" ><a href="#">当前在线：{{ request.session.user_name }}</a></li>
                   <li class="searchItem" ><a href="/logout/">登出</a></li>
+                  <li class="searchItem" ><a href="#">个人中心</a></li>
 {#                  <li><a  href="/function1/">图表展示</a></li>#}
             {% else %}
             <li class="searchItem" ><a href="/login/">登录</a></li>
@@ -43,35 +44,35 @@
     </div>
 	<div id="bd" class="ue-clear">
         <div id="main">
-        	<div class="sideBar">
-            	
-                <div class="subfield">网站</div>
-                <ul class="subfieldContext">
-                	<li>
-                    	<span class="name">伯乐在线</span>
-						<span class="unit">(13930)</span>
-                    </li>
-                    <li>
-                    	<span class="name">知乎</span>
-						<span class="unit">(9862)</span>
-                    </li>
-                    <li>
-                    	<span class="name">拉勾网</span>
-						<span class="unit">(9862)</span>
-                    </li>
-                    <li class="more">
-                    	<a href="javascript:;">
-                        	<span class="text">更多</span>
-                        	<i class="moreIcon"></i>
-                        </a>
-                    </li>
-                </ul>
-                
-                            
-                <div class="sideBarShowHide">
-                	<a href="javascript:;" class="icon"></a>
-                </div>
-            </div>
+{#        	<div class="sideBar">#}
+{#            	#}
+{#                <div class="subfield">网站</div>#}
+{#                <ul class="subfieldContext">#}
+{#                	<li>#}
+{#                    	<span class="name">伯乐在线</span>#}
+{#						<span class="unit">(13930)</span>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                    	<span class="name">知乎</span>#}
+{#						<span class="unit">(9862)</span>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                    	<span class="name">拉勾网</span>#}
+{#						<span class="unit">(9862)</span>#}
+{#                    </li>#}
+{#                    <li class="more">#}
+{#                    	<a href="javascript:;">#}
+{#                        	<span class="text">更多</span>#}
+{#                        	<i class="moreIcon"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#                #}
+{#                            #}
+{#                <div class="sideBarShowHide">#}
+{#                	<a href="javascript:;" class="icon"></a>#}
+{#                </div>#}
+{#            </div>#}
             <div class="resultArea">
             	<p class="resultTotal">
                 	<span class="info">找到约&nbsp;<span class="totalResult">{{ total_nums }}</span>&nbsp;条结果(用时<span class="time">{{ last_seconds }}</span>秒)，共约<span class="totalPage">{{ page_nums }}</span>页</span>
@@ -91,10 +92,8 @@
                                 <span class="dependValue">
                                     <span class="label">得分：</span>
                                     <span class="value">{{ hit.score }}</span>
-
                                 </span>
                             <span class="dependValue">
-
                                     <span class="label">收藏</span>
                                 </span>
                             </div>
@@ -140,8 +139,27 @@
         </div><!-- End of main -->
     </div><!--End of bd-->
 </div>
+<div id="foot" >
+    <table  cellpadding="5px" cellspacing="5px">
+        <tr width="50px">
 
-<div id="foot">Copyright &copy;projectsedu.com 版权所有  E-mail:admin@projectsedu.com</div>
+            <td >想关技术网站:</td>
+            <td ><a href="https://blog.51cto.com">51cto</a></td>
+            <td >&nbsp;&nbsp;&nbsp;</td>
+            <td ><a href="https://www.cnblogs.com/">博客园</a></td>
+            <td >&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="https://www.csdn.net/">CSDN</a></td>
+            <td >&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="https://z.itpub.net">itpub</a></td>
+            <td >&nbsp;&nbsp;&nbsp;</td>
+             <td><a href="https://www.oschina.net">开源中国</a></td>
+            <td >&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="https://segmentfault.com">segmentfault</a></td>
+        </tr>
+    </table>
+</div>
+
+<div id="foot">Copyright ©albert_hq.com 版权所有 E-mail:1422127065@qq.com</div>
 </body>
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/global.js' %}"></script>

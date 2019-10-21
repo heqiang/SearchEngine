@@ -18,7 +18,9 @@ class RegisterForm(forms.Form):
                                    attrs={'class': 'form-control', 'placeholder': "Password"}))
     password2 = forms.CharField(label="请再次输入密码", max_length=256, widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': "Password"}))
-    email=forms.EmailField(label="邮箱地址",max_length=256, widget=forms.PasswordInput(
+    email=forms.EmailField(label="邮箱地址",max_length=256, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': "email"}))
     sex = forms.ChoiceField(label='性别',choices=gender)
+    job=forms.CharField(label="job",widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "job", 'autofocus': ''}))
+    description=forms.CharField(label="简介",widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': "简介"}))
     captcha = CaptchaField(label='验证码')

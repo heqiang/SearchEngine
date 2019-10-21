@@ -49,6 +49,8 @@ def register(request):
             password2 = register_form.cleaned_data.get('password2')
             email = register_form.cleaned_data.get('email')
             sex = register_form.cleaned_data.get('sex')
+            job=register_form.cleaned_data.get('job')
+            destription=register_form.cleaned_data.get("description")
 
             if password1 != password2:
                 message = '两次输入的密码不同！'
@@ -68,9 +70,11 @@ def register(request):
                 new_user.password = password1
                 new_user.email = email
                 new_user.sex = sex
+                new_user.job=job
+                new_user.description=destription
                 new_user.save()
-
-                return redirect('/login/')
+                message="注册成功"
+                return redirect('/login/',locals())
         else:
             return render(request, 'login/register.html', locals())
     register_form = forms.RegisterForm()

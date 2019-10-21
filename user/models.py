@@ -13,10 +13,13 @@ class  User(models.Model):
     )
     username=models.CharField(max_length=30,unique=True)
     password=models.CharField(max_length=255)
-    email=models.EmailField(unique=True)
-    sex=models.CharField(max_length=32,choices=gender,default='男')
+    email=models.EmailField(unique=True,blank=True)
+    sex=models.CharField(max_length=32,choices=gender,default='男',blank=True)
+    job=models.CharField(max_length=128,blank=True)
+    description=models.TextField(blank=True)
     createtime=models.DateTimeField(auto_now_add=True)
-    headimg=models.FileField(upload_to="headimg")
+
+    headimg=models.FileField(upload_to="headimg",blank=True)
 class  Collect(models.Model):
     user=models.ForeignKey('User',on_delete=models.CASCADE)
     collecttitle=models.CharField(max_length=255,unique=True)
