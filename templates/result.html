@@ -77,21 +77,20 @@
             	<p class="resultTotal">
                 	<span class="info">找到约&nbsp;<span class="totalResult">{{ total_nums }}</span>&nbsp;条结果(用时<span class="time">{{ last_seconds }}</span>秒)，共约<span class="totalPage">{{ page_nums }}</span>页</span>
                 </p>
-
-
                 <div class="resultList">
+
                     {% for hit in all_list %}
                     <div class="resultItem">
                             <div class="itemHead">
-                                <a href="{{ hit.url }}"  target="_blank" class="title">{% autoescape off %}{{ hit.title }}{% endautoescape %}</a>
+                                <a href="{{ hit.url }}"  target="_blank" class="title" onclick="Search(this)">{% autoescape off %}{{ hit.title }}{% endautoescape %}</a>
                                 <span class="divsion">-</span>
-                                <span class="fileType">
-                                    <span class="label">来源：</span>
-                                    <span class="value">{{hit.source}}</span>
-                                </span>
-                                <span class="dependValue">
-                                    <span class="label">得分：</span>
-                                    <span class="value">{{ hit.score }}</span>
+{#                                <span class="fileType">#}
+{#                                    <span class="label">来源：</span>#}
+{#                                    <span class="value">{{hit.source}}</span>#}
+{#                                </span>#}
+{#                                <span class="dependValue">#}
+{#                                    <span class="label">得分：</span>#}
+{#                                    <span class="value">{{ hit.score }}</span>#}
                                 </span>
                             <span class="dependValue">
                                     <span class="label">收藏</span>
@@ -106,17 +105,18 @@
                                     <label>网站：</label>
                                     <span class="value">{{hit.source}}</span>
                                 </span>
-                                <span class="info">
-                                    <label>发布时间：</label>
-                                    <span class="value">{{hit.time}}</span>
-                                </span>
+{#                                <span class="info">#}
+{#                                    <label>发布时间：</label>#}
+{#                                    <span class="value">{{hit.time}}</span>#}
+{#                                </span>#}
                             </div>
                         </div>
                     {% endfor %}
+
                 </div>
                 <!-- 分页 -->
                 <div class="pagination ue-clear"></div>
-{#   相关搜索         #}
+            {#   相关搜索         #}
             </div>
             <div class="historyArea">
             	<div class="hotSearch">
@@ -167,6 +167,7 @@
 <script type="text/javascript">
 
     var search_url = "{% url 'search' %}"
+
 
 	$('.searchList').on('click', '.searchItem', function(){
 		$('.searchList .searchItem').removeClass('current');
@@ -232,7 +233,7 @@
 		if($('#container').outerHeight() < $(window).height()){
 			$('#container').height($(window).height()-33);
 		}	
-	}
+	}}
 </script>
 <script type="text/javascript">
 

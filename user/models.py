@@ -18,15 +18,14 @@ class  User(models.Model):
     job=models.CharField(max_length=128,blank=True)
     description=models.TextField(blank=True)
     createtime=models.DateTimeField(auto_now_add=True)
-
     headimg=models.FileField(upload_to="headimg",blank=True)
 class  Collect(models.Model):
     user=models.ForeignKey('User',on_delete=models.CASCADE)
-    collecttitle=models.CharField(max_length=255,unique=True)
+    collecttitle=models.CharField(max_length=255)
     collecturl=models.CharField(max_length=128)
     collecttime=models.DateTimeField(auto_now_add=True)
 class Search(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    searchtitle = models.CharField(max_length=255, unique=True)
-    searchurl = models.CharField(max_length=128)
+    searchtitle = models.CharField(max_length=255)
+    searchurl = models.CharField(max_length=128,blank=True)
     searchtime = models.DateTimeField(auto_now_add=True)

@@ -1,38 +1,54 @@
-import  pymysql
 import requests
+from lxml import etree
 
 
-# conn = pymysql.connect(
-#     host="localhost",
-#     user="root",
-#     passwd="1422127065",
-#     database="search_engine"
-# )
 
-# def  get_ip():
+# proxy = {
+#     'http': 'http://117.85.105.170:808',
+#     'https': 'https://117.85.105.170:808'
+# }
+# '''head 信息'''
+# head = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
+#              'Connection': 'keep-alive'}
+# '''http://icanhazip.com会返回当前的IP地址'''
+# res=requests.get("https://www.baidu.com",proxies=proxy,timeout=3)
+# print(res.text)
 
-    # cur=conn.cursor()
-    # sql="SELECT id,ip,port from xi_ci_ip"
-    # cur.execute(sql)
-    # data=cur.fetchall()
-    # for  x in data:
-    #     id=x[0]
-    #     #     ip=x[1]
-    #     #     port=x[2]
-proxy = {
-     'http':'http://122.242.131.41:9000',
-     'https':'https://171.35.161.106:9999'
-}
-try:
-    res = requests.get('https://www.baidu.com/', porxies=proxy, timeout=3)
-    print('能使用')
-except Exception as e:
-    print("不能使用")
-    #         sql="DELETE  from  xi_ci_ip  WHERE  id="+str(id)
-    #         cur.execute(sql)
-    #         conn.commit()
-    #         print(ip+"-已删除")
-    # conn.close()
+# proxy = {
+#     'http': 'http://117.85.105.170:808',
+#     'https': 'https://117.85.105.170:808'
+# }
+# '''''head 信息'''
+# head = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
+#              'Connection': 'keep-alive'}
+# '''''http://icanhazip.com会返回当前的IP地址'''
+# p = requests.get('http://icanhazip.com', headers=head, proxies=proxy)
+# print(p.text)
+
+def getproxy(url):
+  res=requests.get(url,headers=head)
+  html=etree.HTML(res.content)
+  for  proxy  in  html.xpath("//table[@class='table table-bordered table-striped']/tbody/tr"):
+        ip=proxy.xpath(".//td[@data-title='IP']/text()")[0]
+        port=proxy.xpath(".//td[@data-title='PORT']/text()")[0]
+        clean_proxy={
+            "http":"http://{0}:{1}".format(ip,port),
+            "https": "https://{0}:{1}".format(ip, port)
+        }
+        with open("proxy.txt","a") as  f:
+            f.write(ip+port+"\n")
+        try:
+            res = requests.get("https://www.baidu.com", proxies={"http":"http://{0}:{1}".format(ip,port)}, timeout=3)
+            if res.status_code==200:
+                print(res.text)
+                with open("proxy.txt","a") as f:
+                    f.write(res.text)
+            else:
+                print("不可用")
+        except Exception as e:
+           print("不可用")
 if __name__ == '__main__':
-    # get_ip()
-    pass
+    for x in range(1,11):
+        print("当前正在爬取第{}页".format(x))
+        url='https://www.kuaidaili.com/free/inha/{0}/'.format(x)
+        getproxy(url)

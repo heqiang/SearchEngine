@@ -68,7 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'Spider.pipelines.SpiderPipeline': None,
-   # 'Spider.pipelines.ElasticsearchPipeline': 4
+   'Spider.pipelines.ElasticsearchPipeline': 4
 }
 
 #布隆过滤

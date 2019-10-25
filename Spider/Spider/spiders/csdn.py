@@ -20,7 +20,7 @@ class CsdnSpider(scrapy.Spider):
     name = 'csdn'
     allowed_domains = ['csdn.net']
     def start_requests(self):
-        for  x in range(20):
+        for  x in range(500):
             for name in list:
                 url_time=int(time.time()*1000000)
                 url='https://www.csdn.net/api/articles?type=more&category={0}&shown_offset={1}'.format(name,str(url_time))

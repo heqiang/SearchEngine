@@ -7,6 +7,11 @@ from user import forms
 #登录逻辑
 def login(requests):
     if requests.session.get('is_login', None):  # 不允许重复登录
+        # print(requests.session.items())
+        username = requests.session.get('user_name')
+        user_id = requests.session.get('user')
+        print("用户名是:".format(username))
+        print("用户id是：".format(user_id))
         return redirect('/result/')
     if requests.method=="POST":
         login_form=forms.UserForm(requests.POST)
@@ -51,7 +56,6 @@ def register(request):
             sex = register_form.cleaned_data.get('sex')
             job=register_form.cleaned_data.get('job')
             destription=register_form.cleaned_data.get("description")
-
             if password1 != password2:
                 message = '两次输入的密码不同！'
                 return render(request, 'login/register.html', locals())
@@ -85,3 +89,51 @@ def logout(requests):
         return redirect('/login/')
     requests.session.flush()
     return redirect("/index/")
+#文章浏览  需要登录获取当前作者的id 需要传递url，title
+def Search_article(requests):
+    searchtitle=requests.GET('title',"")
+    searchurl=requests.GET('url',"")
+    user_id=requests.session.get('user_id')
+    models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
+
+#文章收藏 #需要登录获取当前作者的id  需要传递url，title
+def Collect_article(requests):
+    collecttitle = requests.GET('title', "")
+    collecturl = requests.GET('url', "")
+    user_id = requests.session.get('user_id')
+    models.Collect.objects.create(collecttitle=collecttitle,collecturl=collecturl,user_id=user_id)
+#查看个人中心的收藏记录  user_id
+
+#返回的页面需要修改
+def personal_collect(requests):
+    user_id = requests.session.get('user_id')
+    all_collect=models.Collect.objects.filter(user_id=user_id)
+    return  render(requests,"personal.html",{"all_collect":all_collect})
+# 查看个人中心的浏览记录  user_id
+def personal_search(requests):
+    user_id = requests.session.get('user_id')
+    all_search = models.Search.objects.filter(user_id=user_id)
+    return render(requests, "personal.html", {"all_collect": all_search})
+def personal(requests):
+    user_id = requests.session.get('user_id')
+    username = requests.GET('username')
+    email = requests.GET('email')
+    same_name_user = models.User.objects.filter(username=username)
+    if same_name_user:
+        message = '用户名已经存在'
+        return render(requests, 'personal.html', locals())
+    same_email_user = models.User.objects.filter(email=email)
+    if same_email_user:
+        message = '该邮箱已经被注册了！'
+        return render(requests, 'personal.html', locals())
+    if username & email:
+        models.User.objects.filter(id=user_id).update(username=username,email=email)
+    elif email:
+        models.User.objects.filter(id=user_id).update(email=email)
+    else:
+        models.User.objects.filter(id=user_id).update(username=username)
+def personal_pwd(requests):
+    user_id = requests.session.get('user_id')
+    pwd=requests.GET('pwd')
+    models.User.objects.filter(user_id=user_id).update(password=pwd)
+    return  render(requests,"personal.html",{"res":"修改成功"})
