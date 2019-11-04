@@ -54,8 +54,8 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'Spider.middlewares.SpiderDownloaderMiddleware': None,
-    'Spider.uamid.Uamid': 300,
-    # 'Spider.middlewares.RandomProxy':10
+    'Spider.middlewares.Uamid': 300,
+    'Spider.middlewares.RandomProxy':10
 }
 
 # Enable or disable extensions
@@ -102,15 +102,3 @@ SCHEDULER_PERSIST = True
 # SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 # # Ensure all spiders share same duplicates filter through redis.
 # DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"ip
-IPPOOL=[
-    {'port': '26007', 'ip': '182.202.221.122'},
-    {'port': '43127', 'ip': '106.57.151.106'},
-    {'port': '28453', 'ip': '113.110.56.191'},
-    {'port': '20920', 'ip': '113.103.140.130'},
-    {'port': '25937', 'ip': '114.238.177.122'},
-    {'port': '46248', 'ip': '60.184.195.75'},
-    {'port': '29804', 'ip': '222.172.196.84'},
-    {'port': '45487', 'ip': '115.216.40.69'},
-    {'port': '39197', 'ip': '49.81.9.152'},
-    {'port': '22587', 'ip': '117.95.73.16'},
-]

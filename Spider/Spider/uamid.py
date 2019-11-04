@@ -12,3 +12,4 @@ class Uamid(UserAgentMiddleware):
          ua=UserAgent(verify_ssl=False)
          print("当前User_Agent是："+ua.random)
          request.headers.setdefault('User-Agent',ua.random)#请求的request带上ua
+         # request.proxy
