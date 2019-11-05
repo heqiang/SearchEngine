@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+         {% load staticfiles %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href={% static "layui/css/layui.css" %} />
+
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+
+            <ul class="layui-nav">
+                <li class="layui-nav-item">
+                    <a href="/index/">Search</a>
+                </li>
+
+                    <li class="layui-nav-item">
+                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                         <a href="/logout/">注销</a>
+                    </li>
+            </ul>
+			</div>
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<ul class="layui-nav layui-nav-tree">
+						<li class="layui-nav-item"><a href="/personDate/">个人资料</a></li>
+						<li class="layui-nav-item"><a href="/collection/">我的收藏</a></li>
+						<li class="layui-nav-item"><a href="/searchHistory/">我的搜索记录</a></li>
+						<li class="layui-nav-item layui-this"><a href="/dataAnalysis/">我的数据分析</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="layui-body" style="padding-top: 60px;background: #F5F5F5;">
+			<span>数据分析页面</span>
+		</div>
+		<script src={% static "layui/layui.js" %}></script>
+	</body>
+</html>

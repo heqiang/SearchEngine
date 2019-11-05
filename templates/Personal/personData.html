@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        {% load staticfiles %}
+		<meta charset="utf-8">
+		<title>个人数据</title>
+		<link rel="stylesheet" type="text/css" href={% static "layui/css/layui.css" %} />
+		<style type="text/css">
+			.layui-tab-content {
+				margin-top: 50px;
+				margin-left: 300px;
+			}
+
+			.edit {
+				position: absolute;
+				right: 30px;
+				top: 75px;
+			}
+
+			.person_wrapper {
+				display: flex;
+				flex-direction: row;
+			}
+
+
+			.person_avator {
+				height: 150px;
+				width: 150px;
+			}
+
+			.avator {
+				height: 150px;
+				border: 150px;
+			}
+
+			.change_avator {
+				position: relative;
+				bottom: 20px;
+				line-height: 50px;
+				text-align: center;
+				cursor: pointer;
+				font-size: 14px;
+			}
+
+			.avator-file {
+				position: relative;
+				top: 20px;
+				left: 20px;
+				width: 120px;
+				height: 30px;
+				cursor: pointer;
+				opacity: 0;
+				z-index: 9;
+			}
+
+			.person_data {
+				margin-left: 100px;
+			}
+
+			.person_data li {
+				display: flex;
+				flex-direction: row;
+				margin-bottom: 10px;
+			}
+
+			.person_data li span {
+				line-height: 34px;
+				width: 50px;
+			}
+
+			.person_data_info {
+				width: 200px;
+				height: 34px;
+				box-sizing: border-box;
+				padding-left: 10px;
+				line-height: 34px;
+				font-weight: 600;
+				background: #fafafa;
+			}
+
+			.person_data_desc {
+				width: 350px;
+				height: 60px;
+				box-sizing: border-box;
+				padding-left: 10px;
+				line-height: 34px;
+				font-weight: 600;
+				background: #fafafa;
+			}
+
+			.layui-card {
+				width: 350px;
+				background: #fafafa;
+			}
+
+			.layui-input-block {
+				margin-left: 10px;
+			}
+
+			.layui-input-block img {
+				position: absolute;
+				left: 290px;
+				bottom: 10px;
+				display: none;
+			}
+
+			.submit {
+				margin-left: 110px;
+				margin-top: 10px;
+			}
+
+			#editValue {
+				padding-top: 25px;
+			}
+
+			#editValue .layui-form-item {
+				display: flex;
+				flex-direction: row;
+			}
+
+			.edit-submit {
+				position: relative;
+				left: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<body class="layui-layout-body">
+			<div class="layui-layout layui-layout-admin">
+				<div class="layui-header">
+					<ul class="layui-nav">
+                <li class="layui-nav-item">
+                    <a href="/index/">Search</a>
+                </li>
+
+                    <li class="layui-nav-item">
+                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                         <a href="/logout/">注销</a>
+                    </li>
+            </ul>
+				</div>
+				<div class="layui-side layui-bg-black">
+					<div class="layui-side-scroll">
+						<ul class="layui-nav layui-nav-tree">
+							<li class="layui-nav-item layui-this"><a href="/personDate/">个人资料</a></li>
+							<li class="layui-nav-item"><a href="/collection/">我的收藏</a></li>
+							<li class="layui-nav-item"><a href="/searchHistory/">我的搜索记录</a></li>
+							<li class="layui-nav-item"><a href="/dataAnalysis/">我的数据分析</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="layui-body" style="padding-top: 60px;background: #F5F5F5;">
+				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">个人基本资料</li>
+						<li>密码修改</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<button type="button" class="layui-btn layui-btn-sm edit">编辑资料</button>
+							<div class="person_wrapper">
+								<div class="person_avator_wrapper">
+									<div class="person_avator">
+										<img src="{% static "image/head.jpg" %}" class="avator">
+									</div>
+									<input type="file" class="avator-file" />
+									<p class="change_avator">点击更换头像</p>
+								</div>
+								<div class="person_data">
+									<ul>
+										<li><span>收藏：</span>
+											<div class="person_data_info">23</div>
+										</li>
+										<li><span>浏览：</span>
+											<div class="person_data_info"></div>
+										</li>
+										<li><span>昵称：</span>
+											<div class="person_data_info">{{ request.session.user_name }}</div>
+										<li><span>性别：</span>
+											<div class="person_data_info">{{ request.session.sex }}</div>
+										</li>
+										<li><span>邮箱：</span>
+											<div class="person_data_info">{{ request.session.email }}</div>
+										</li>
+										<li><span>简介：</span>
+											<div class="person_data_desc">{{ request.session.description }}</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<div class="layui-card">
+								<div class="layui-card-header">密码修改</div>
+								<div class="layui-card-body">
+									<form class="layui-form">
+										<div class="layui-form-item">
+											<div class="layui-input-block">
+												<input class="layui-input origin-pw" type="password" placeholder="请输入原密码" autocomplete="off">
+												<img src="img/error.png" class="right">
+												<img src="img/right.png" class="error">
+											</div>
+										</div>
+										<div class="layui-form-item">
+											<div class="layui-input-block">
+												<input class="layui-input layui-disabled new-pw" type="password" placeholder="请输入现密码" autocomplete="off">
+											</div>
+										</div>
+										<div class="layui-form-item">
+											<div class="layui-input-block">
+												<input class="layui-input layui-disabled renew-pw" type="password" placeholder="请再次输入密码" autocomplete="off">
+											</div>
+										</div>
+									</form>
+									<button class="layui-btn submit">立即提交</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<form class="layui-form" id="editValue" lay-filter="editValue">
+				<div class="layui-form-item">
+					<label class="layui-form-label">昵称:</label>
+					<div class="layui-input-block">
+						<input class="layui-input" type="text" name="name" lay-verify="required" placeholder="昵称" autocomplete="off">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">邮箱:</label>
+					<div class="layui-input-block">
+						<input class="layui-input" type="email" name="email" lay-verify="email|required" placeholder="邮箱" autocomplete="off">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">简介:</label>
+					<div class="layui-input-block">
+						<textarea style="width:300px;height:100px;" name="desc" lay-verify="required" placeholder="简介"></textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block edit-submit">
+						<button class="layui-btn" lay-submit lay-filter="editBut">立即提交</button>
+						<button class="layui-btn layui-btn-primary cancel">取消</button>
+					</div>
+				</div>
+			</form>
+		</body>
+		<script src={% static "layui/layui.js" %}></script>
+		<script src={% static "js/jquery-3.4.1.js" %}></script>
+		<script>
+
+			layui.use(['element', 'layer', 'form'], function() {
+				var element = layui.element;
+				var layer = layui.layer;
+				var form = layui.form;
+				form.val("editValue", {
+					"name": "",
+					"email": "",
+					"desc": ""
+				});
+				//监控编辑资料的form
+				form.on('submit(editBut)', function(data) {
+				    var change_url = "{% url  'change'%}"
+					$.ajax({
+						url:change_url,
+						method: 'POST',
+						data: data.field,
+						success: function(data) {
+						    alert(data)
+							if (data.message == 'ok') {
+								layer.msg('修改成功', {
+									time: '1000',
+								});
+							} else {
+								layer.msg('修改失败', {
+									time: '1000',
+								})
+							}
+						}
+					});
+					return false;
+				});
+			});
+			var originpwFlag = false; //用于判断原始密码是否正确
+			var icon = $(".layui-input-block>img");
+			var right = $(".layui-input-block>img");
+			var err = $(".layui-input-block>.error");
+			var newPw = $(".new-pw");
+			var renewPw = $(".renew-pw");
+			var formIndex;
+			$('.cancel').click(function() {
+				layer.close(formIndex);
+				return false;
+			});
+			// 图片上传
+			$('.avator-file').change(function(e) {
+				var files = e.target.files[0];
+				var fd = FormData();
+				if (files) {
+					var rFilter =
+						/^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+					if (!rFilter.test(files.type)) {
+						layer.msg('请上传图片', {
+							time: '1000'
+						});
+					} else {
+						var reader = new FileReader();
+						reader.onload = (function(file) {
+							return function(e) {
+								var datainfo = this.result;
+								$(".avator").attr({
+									"src": datainfo,
+								});
+							};
+						})(e.target.files[0]);
+						reader.readAsDataURL(e.target.files[0]);
+						// 添加到fd对象中等待提交
+						fd.append("cert_scan", e.target.files[0]);
+						$.ajax({
+							url: "xxxx/xxxxx",
+							method: "POST",
+							data: fd,
+							success: function(data) {
+								infor_notice(data.code, data.message);
+								if (data.status === '0') {
+									layer.msg('上传成功', {
+										time: '1000'
+									});
+								} else {
+									layer.msg('上传失败', {
+										time: '1000'
+									});
+								}
+							}
+						})
+
+					}
+				}
+			});
+			// 原密码校验
+			$(".origin-pw").blur(function() {
+				var originpw = this.value;
+				$.ajax({
+					url: "",
+					method: "POST",
+					data: originpw,
+					success: function(data) {
+						icon.css({
+							display: 'none'
+						});
+						if (data.status === '0') {
+							right.css({
+								display: 'block'
+							});
+							newPw.removeClass("layui-disabled");
+							renewPw.removeClass("layui-disabled");
+							originpwFlag = true;
+						} else {
+							err.css({
+								display: 'block'
+							});
+						}
+					},
+					error: function() {
+						err.css({
+							display: 'block'
+						});
+					}
+				});
+			});
+
+			// 密码修改
+			$(".submit").click(function() {
+				if (originpwFlag) {
+					if (newPw.value.trim() && newPw.value.trim() === renewPw.value.trim()) {
+						var data = {
+							newPw: newPw.value.trim(),
+							renewPw: renewPw.value.trim()
+						}
+						$.ajax({
+							url: "",
+							method: "POST",
+							data: data,
+							success: function(data) {
+								if (data.status === '0') {
+									layer.msg("修改成功", {
+										time: 1000,
+									})
+								} else {
+									layer.msg("修改失败", {
+										time: 1000,
+									})
+								}
+							},
+						})
+					} else {
+						layer.msg("请确认修改密码一样", {
+							time: 1000,
+						})
+					}
+				} else {
+					err.css({
+						display: 'block'
+					});
+					layer.msg('请确认原始密码正确', {
+						time: 1000
+					});
+				}
+			});
+			// 点击修改,进行编辑
+			$(".edit").click(function() {
+				formIndex = layer.open({
+					title: ['资料修改', 'font-size:18px;'],
+					type: 1,
+					area: ["500px", "400px"],
+					content: $("#editValue"),
+				});
+			});
+		</script>
+	</body>
+</html>

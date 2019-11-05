@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html >
 
 {% load staticfiles %}
 
@@ -9,9 +9,35 @@
 <title>lcv-search 搜索引擎</title>
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
 <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+        .login{
+        margin-left:1000px;!important;
+            margin-top:0px ;
+        }
+        .foot{
+           text-align: center;
+        }
+        .foot table{
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
+{#    <div class="nav">#}
+{#    	<ul class="searchList">#}
+{#            {% if request.session.is_login %}#}
+{#                  <li class="searchItem  login" ><a href="#">当前在线：{{ request.session.user_name }}</a></li>#}
+{#                  <li class="searchItem" ><a href="/logout/">登出</a></li>#}
+{#                  <li class="searchItem" ><a href="#">个人中心</a></li>#}
+{#                  <li><a  href="/function1/">图表展示</a></li>#}
+{#            {% else %}#}
+{#            <li class="searchItem login" ><a href="/login/">登录</a></li>#}
+{#            <li class="searchItem register" ><a href="/register/">注册</a></li>#}
+{##}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
 	<div id="bd">
         <div id="main">
         	<h1 class="title">

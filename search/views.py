@@ -24,7 +24,9 @@ def  IndexView(request):
     for x in topn_search:
         new_topn_search.append(x.decode(encoding='utf-8'))
     return render(request,'index.html',{"new_topn_search":new_topn_search})
+def Result(requests):
 
+    return render(requests,"result.html")
 def SearchSuggest(request):                                      # 搜索自动补全逻辑处理
     key_words = request.GET.get('s', '')# 获取到请求词
     re_datas = []
@@ -54,9 +56,8 @@ def SearchView(request):
         new_topn_search=[]
         for x  in topn_search:
             new_topn_search.append(x.decode(encoding='utf-8'))
-        page = request.GET.get("p", "1")
 
-        print("当前是{0}页".format(str(page)))
+        page = request.GET.get("p", "2")
         try:
             page = int(page)
         except:
@@ -85,9 +86,10 @@ def SearchView(request):
                 }
             }
         )
+        print(len(response))
         end_time=datetime.now()
         last_seconds=(end_time-start_time).total_seconds()
-        total_nums = response["hits"]["total"]
+        total_nums = response["hits"]["total"] #返回总的条数
         if total_nums>10:
             page_nums=int(total_nums/10)+1
         else:
@@ -110,8 +112,6 @@ def SearchView(request):
                   hit_dict["source"]=hit['_source']["source"]
                   # 将内容加入到list
                   all_list.append(hit_dict)
-
-
         return render(request, "result.html", {"all_list":all_list,
                                                  "key_words":key_words,
                                                  "total_nums":total_nums,#数据总条数
@@ -119,6 +119,5 @@ def SearchView(request):
                                                  "page_nums":page_nums,#页数
                                                  "last_seconds":last_seconds,
                                                   "topn_search": new_topn_search,
-                                                  # "jobbole_count":jobbole_count,
                                                 })
 

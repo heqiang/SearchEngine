@@ -2,24 +2,22 @@ from django.shortcuts import render
 from django.shortcuts import  redirect
 from user import  models
 from user import forms
-# Create your views here.
-
+import hashlib
+from django.http import HttpResponse
+import json
 #登录逻辑
 def login(requests):
     if requests.session.get('is_login', None):  # 不允许重复登录
-        # print(requests.session.items())
         username = requests.session.get('user_name')
         user_id = requests.session.get('user')
-        print("用户名是:".format(username))
-        print("用户id是：".format(user_id))
         return redirect('/result/')
     if requests.method=="POST":
         login_form=forms.UserForm(requests.POST)
         message="请检查填写的内容！"
         if login_form.is_valid():
             username=login_form.cleaned_data.get("username")
-            print(username)
-            password = login_form.cleaned_data.get("password")
+            password = hashlib.sha1(login_form.cleaned_data.get("password").encode('utf-8')).hexdigest()
+            print(password)
             try:
                 user= models.User.objects.get(username=username)
                 print("当前用户状态"+"\n")
@@ -32,6 +30,9 @@ def login(requests):
                 requests.session['is_login']=True
                 requests.session['user_id']=user.id
                 requests.session['user_name']=user.username
+                requests.session['sex']=user.sex
+                requests.session['email']=user.email
+                requests.session['des']=user.description
                 return  redirect('/index/')
             else:
                 message='密码错误'
@@ -71,7 +72,7 @@ def register(request):
 
                 new_user = models.User()
                 new_user.username = username
-                new_user.password = password1
+                new_user.password = hashlib.sha1(password1.encode('utf-8')).hexdigest()
                 new_user.email = email
                 new_user.sex = sex
                 new_user.job=job
@@ -86,7 +87,7 @@ def register(request):
 def logout(requests):
     #清除session  若是没有登录就直接跳转到登录页面,若是登录了在跳转到登出则跳转至文章页面
     if not requests.session.get('is_login', None):
-        return redirect('/login/')
+        return redirect('/index/')
     requests.session.flush()
     return redirect("/index/")
 #文章浏览  需要登录获取当前作者的id 需要传递url，title
@@ -96,6 +97,26 @@ def Search_article(requests):
     user_id=requests.session.get('user_id')
     models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
 
+#用户资料修改
+def change(requests):
+    if requests.is_ajax():
+        user_id = requests.session.get('user_id')
+        username=requests.POST['name']
+        email=requests.POST['email']
+        des = requests.POST['desc']
+        user=models.User.objects.filter(username=username)
+        if user:
+            message="User name is nor valid"
+            return HttpResponse(json.dumps({"message":message}))
+        else:
+            email=models.User.objects.filter(email=email)
+            if email:
+                message="email"
+                return HttpResponse(json.dumps({"message":message}))
+            else:
+                message="ok"
+                models.User.objects.filter(id=user_id).update(username=username,email=email,description=des)
+                return HttpResponse(json.dumps({"message":message}))
 #文章收藏 #需要登录获取当前作者的id  需要传递url，title
 def Collect_article(requests):
     collecttitle = requests.GET('title', "")
@@ -137,3 +158,16 @@ def personal_pwd(requests):
     pwd=requests.GET('pwd')
     models.User.objects.filter(user_id=user_id).update(password=pwd)
     return  render(requests,"personal.html",{"res":"修改成功"})
+
+
+
+def personData(requests):
+    return render(requests,"Personal/personData.html")
+def collection(requests):
+    return render(requests,"Personal/collection.html")
+def searchHistory(requests):
+    return render(requests,"Personal/searchHistory.html")
+def dataAnalysis(requests):
+    return render(requests,"Personal/dataAnalysis.html")
+
+
