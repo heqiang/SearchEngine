@@ -187,7 +187,7 @@
 											<div class="person_data_info">{{ request.session.email }}</div>
 										</li>
 										<li><span>简介：</span>
-											<div class="person_data_desc">{{ request.session.description }}</div>
+											<div class="person_data_desc">{{ request.session.des }}</div>
 										</li>
 									</ul>
 								</div>
@@ -201,18 +201,18 @@
 										<div class="layui-form-item">
 											<div class="layui-input-block">
 												<input class="layui-input origin-pw" type="password" placeholder="请输入原密码" autocomplete="off">
-												<img src="img/error.png" class="right">
-												<img src="img/right.png" class="error">
+{#												<img src={% static "img/error.png" %} class="right">#}
+{#												<img src={% static  "img/right.png" %} class="error">#}
 											</div>
 										</div>
 										<div class="layui-form-item">
 											<div class="layui-input-block">
-												<input class="layui-input layui-disabled new-pw" type="password" placeholder="请输入现密码" autocomplete="off">
+												<input class="layui-input layui-disabled new-pw" id="newpwd" type="password" placeholder="请输入现密码" autocomplete="off">
 											</div>
 										</div>
 										<div class="layui-form-item">
 											<div class="layui-input-block">
-												<input class="layui-input layui-disabled renew-pw" type="password" placeholder="请再次输入密码" autocomplete="off">
+												<input class="layui-input layui-disabled renew-pw"id="renewpwd" type="password" placeholder="请再次输入密码" autocomplete="off">
 											</div>
 										</div>
 									</form>
@@ -271,32 +271,29 @@
 						method: 'POST',
 						data: data.field,
 						success: function(data) {
-						    alert(data)
-							if (data.message == 'ok') {
+
+							if (data.message =='ok') {
 								layer.msg('修改成功', {
 									time: '1000',
 								});
-							} else {
+							}else {
 								layer.msg('修改失败', {
 									time: '1000',
 								})
-							}
+                                }
+
 						}
 					});
 					return false;
 				});
 			});
-			var originpwFlag = false; //用于判断原始密码是否正确
+            var originpwFlag = false; //用于判断原始密码是否正确
 			var icon = $(".layui-input-block>img");
 			var right = $(".layui-input-block>img");
 			var err = $(".layui-input-block>.error");
 			var newPw = $(".new-pw");
 			var renewPw = $(".renew-pw");
 			var formIndex;
-			$('.cancel').click(function() {
-				layer.close(formIndex);
-				return false;
-			});
 			// 图片上传
 			$('.avator-file').change(function(e) {
 				var files = e.target.files[0];
@@ -342,25 +339,34 @@
 					}
 				}
 			});
+
+			$('.cancel').click(function() {
+				layer.close(formIndex);
+				return false;
+			});
 			// 原密码校验
 			$(".origin-pw").blur(function() {
 				var originpw = this.value;
+				var check_pwd="{% url  'check_pwd'%}"
 				$.ajax({
-					url: "",
+					url: check_pwd,
 					method: "POST",
-					data: originpw,
+					data: {"pwd":originpw},
 					success: function(data) {
 						icon.css({
 							display: 'none'
 						});
-						if (data.status === '0') {
+						if (data.message ==='ok') {
+
 							right.css({
 								display: 'block'
 							});
 							newPw.removeClass("layui-disabled");
 							renewPw.removeClass("layui-disabled");
-							originpwFlag = true;
+                            originpwFlag = true;
+
 						} else {
+						    alert(data.message)
 							err.css({
 								display: 'block'
 							});
@@ -376,14 +382,17 @@
 
 			// 密码修改
 			$(".submit").click(function() {
+
 				if (originpwFlag) {
-					if (newPw.value.trim() && newPw.value.trim() === renewPw.value.trim()) {
+
+					if ($.trim(newPw.val()) && $.trim(newPw.val()) === $.trim(renewPw.val())) {
 						var data = {
-							newPw: newPw.value.trim(),
-							renewPw: renewPw.value.trim()
+							newPw: $.trim(newPw.val()),
+
 						}
+                        var change_password="{%  url  'change_password' %}"
 						$.ajax({
-							url: "",
+							url:change_password ,
 							method: "POST",
 							data: data,
 							success: function(data) {

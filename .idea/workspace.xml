@@ -2,57 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad707256-8dcb-4744-b2cd-02d6e2337e19" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/static/image/head.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/avator.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/error.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/jquery-3.4.1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/layui.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/layui.mobile.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/code.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/laydate/default/laydate.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/icon-ext.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/layer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/loading-0.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/loading-1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/css/modules/layer/default/loading-2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/code.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/colorpicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/element.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/flow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/laydate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/layedit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/layer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/laypage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/laytpl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/mobile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/rate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/slider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/table.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/transfer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/tree.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/upload.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/lay/modules/util.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/layui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Personal/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Personal/collection.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Personal/dataAnalysis.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Personal/personData.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Personal/searchHistory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BS_Search/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BS_Search/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Personal/personData.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Personal/personData.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
@@ -101,40 +52,20 @@
     <favorites_list name="BS_Search" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.1386225">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="personData.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/templates/Personal/personData.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="72">
-                  <caret line="282" column="29" lean-forward="true" selection-start-line="282" selection-start-column="29" selection-end-line="282" selection-end-column="29" />
-                  <folding>
-                    <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#form#0;n#body#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/user/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="246">
-                  <caret line="112" column="21" lean-forward="true" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#0#35#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="searchHistory.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/Personal/searchHistory.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="57" column="16" lean-forward="true" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -146,12 +77,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>value</find>
-      <find>连家</find>
-      <find>navbar-brand</find>
-      <find>login_form</find>
-      <find>register_form</find>
-      <find>ArticType</find>
       <find>redis</find>
       <find>Spidef</find>
       <find>数据</find>
@@ -175,7 +100,13 @@
       <find>layui-logo</find>
       <find>change_avator</find>
       <find>avator-file</find>
+      <find>origin</find>
+      <find>origin-pw</find>
       <find>edit</find>
+      <find>originpwFlag</find>
+      <find>newPw</find>
+      <find>new-pw</find>
+      <find>layui-body</find>
     </findStrings>
     <replaceStrings>
       <replace>time</replace>
@@ -238,10 +169,10 @@
         <option value="$PROJECT_DIR$/templates/Personal/dataAnalysis.html" />
         <option value="$PROJECT_DIR$/templates/Personal/searchHistory.html" />
         <option value="$PROJECT_DIR$/templates/Personal/collection.html" />
-        <option value="$PROJECT_DIR$/user/urls.py" />
         <option value="$PROJECT_DIR$/BS_Search/settings.py" />
-        <option value="$PROJECT_DIR$/templates/Personal/personData.html" />
+        <option value="$PROJECT_DIR$/user/urls.py" />
         <option value="$PROJECT_DIR$/user/views.py" />
+        <option value="$PROJECT_DIR$/templates/Personal/personData.html" />
       </list>
     </option>
   </component>
@@ -251,11 +182,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="21" />
-    <option name="y" value="16" />
-    <option name="width" value="1734" />
-    <option name="height" value="1024" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="155" />
+    <option name="width" value="1805" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -265,6 +195,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,46 +206,7 @@
             <path>
               <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="image" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
@@ -331,7 +223,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -522,7 +413,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="18" y="14" width="1386" height="818" extended-state="0" />
+    <frame x="472" y="4" width="1490" height="854" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -531,10 +422,10 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.6645866" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.64646465" />
-      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.65051395" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8009331" visible="true" weight="0.13629518" />
+      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.4504644" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8009331" visible="true" weight="0.15502793" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.0" />
+      <window_info anchor="right" id="Database" order="3" weight="0.0" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" sideWeight="0.20050761" side_tool="true" weight="0.15962838" />
       <window_info id="Favorites" order="2" sideWeight="0.19906688" side_tool="true" weight="0.15962838" />
@@ -579,7 +470,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="29" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -702,9 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-257">
           <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -799,13 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/search/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1932">
@@ -820,16 +701,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Personal/avater.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="26" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Personal/avater.html" />
     <entry file="file://$PROJECT_DIR$/static/layui/css/layui.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -865,20 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Personal/dataAnalysis.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Personal/searchHistory.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="33" column="74" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/Personal/collection.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
@@ -903,16 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BS_Search/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -920,22 +768,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Personal/personData.html">
+    <entry file="file://$PROJECT_DIR$/search/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="282" column="29" lean-forward="true" selection-start-line="282" selection-start-column="29" selection-end-line="282" selection-end-column="29" />
+        <state relative-caret-position="161">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
           <folding>
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#form#0;n#body#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="112" column="21" lean-forward="true" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
+        <state relative-caret-position="432">
+          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Personal/dataAnalysis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Personal/personData.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5993">
+          <caret line="154" column="18" lean-forward="true" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Personal/searchHistory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="57" column="16" lean-forward="true" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

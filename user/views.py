@@ -3,8 +3,21 @@ from django.shortcuts import  redirect
 from user import  models
 from user import forms
 import hashlib
-from django.http import HttpResponse
-import json
+from django.http import JsonResponse
+import pymysql
+
+
+conn=pymysql.connect(
+    host='localhost',
+    user='root',
+    password='1422127065',
+    db='bishe',
+    charset="utf8"
+
+
+)
+cursor=conn.cursor()
+
 #登录逻辑
 def login(requests):
     if requests.session.get('is_login', None):  # 不允许重复登录
@@ -84,18 +97,13 @@ def register(request):
             return render(request, 'login/register.html', locals())
     register_form = forms.RegisterForm()
     return render(request, 'login/register.html', locals())
+
 def logout(requests):
     #清除session  若是没有登录就直接跳转到登录页面,若是登录了在跳转到登出则跳转至文章页面
     if not requests.session.get('is_login', None):
         return redirect('/index/')
     requests.session.flush()
     return redirect("/index/")
-#文章浏览  需要登录获取当前作者的id 需要传递url，title
-def Search_article(requests):
-    searchtitle=requests.GET('title',"")
-    searchurl=requests.GET('url',"")
-    user_id=requests.session.get('user_id')
-    models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
 
 #用户资料修改
 def change(requests):
@@ -107,16 +115,68 @@ def change(requests):
         user=models.User.objects.filter(username=username)
         if user:
             message="User name is nor valid"
-            return HttpResponse(json.dumps({"message":message}))
+            return JsonResponse({"message":message})
         else:
-            email=models.User.objects.filter(email=email)
-            if email:
+            get_email=models.User.objects.filter(email=email)
+            if get_email:
                 message="email"
-                return HttpResponse(json.dumps({"message":message}))
+                return JsonResponse({"message":message})
             else:
                 message="ok"
-                models.User.objects.filter(id=user_id).update(username=username,email=email,description=des)
-                return HttpResponse(json.dumps({"message":message}))
+                update_sql="UPDATE user_user set username='{0}',email='{1}',description='{2}' where id='{3}'".format(username,email,des,user_id)
+                requests.session['user_name'] = username
+                requests.session['email'] = email
+                requests.session['des'] = des
+                cursor.execute(update_sql)
+                conn.commit()
+                conn.close()
+                return JsonResponse({"message":message})
+
+#检查前端床过来的密码是否正确
+def check_pwd(requests):
+    if requests.is_ajax():
+        data=requests.POST['pwd'] #获取前端传过来的密码
+        user_id = requests.session.get('user_id')
+        pwd=hashlib.sha1(data.encode('utf-8')).hexdigest()#对密码进行加密
+        pwd_sq="select password from user_user  where id='{0}'".format(user_id)#获取当前用户的数据库密码
+        cursor.execute(pwd_sq)
+
+        userpwd = cursor.fetchone()
+        if str(userpwd[0])==str(pwd):
+            return JsonResponse({ "message":"ok"})
+        else:
+            return JsonResponse({"message": "密码错误"})
+        conn.commit()
+        conn.close()
+def change_password(requests):
+        if requests.is_ajax():
+            user_id = requests.session.get('user_id')
+            data=requests.POST['newPw']
+            pwd = hashlib.sha1(data.encode('utf-8')).hexdigest()
+            change_pwd_sql="UPDATE user_user set password='{0}' where id='{1}'".format(pwd,user_id)
+
+            res=cursor.execute(change_pwd_sql)
+
+            if res==1:
+                return JsonResponse({"status":'0'})
+            else:
+                print(res)
+            conn.commit()
+            conn.close()
+
+
+
+
+#文章浏览  需要登录获取当前作者的id 需要传递url，title
+def Search_article(requests):
+    searchtitle=requests.GET('title',"")
+    searchurl=requests.GET('url',"")
+    user_id=requests.session.get('user_id')
+    models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
+
+
+
+
 #文章收藏 #需要登录获取当前作者的id  需要传递url，title
 def Collect_article(requests):
     collecttitle = requests.GET('title', "")
@@ -135,24 +195,7 @@ def personal_search(requests):
     user_id = requests.session.get('user_id')
     all_search = models.Search.objects.filter(user_id=user_id)
     return render(requests, "personal.html", {"all_collect": all_search})
-def personal(requests):
-    user_id = requests.session.get('user_id')
-    username = requests.GET('username')
-    email = requests.GET('email')
-    same_name_user = models.User.objects.filter(username=username)
-    if same_name_user:
-        message = '用户名已经存在'
-        return render(requests, 'personal.html', locals())
-    same_email_user = models.User.objects.filter(email=email)
-    if same_email_user:
-        message = '该邮箱已经被注册了！'
-        return render(requests, 'personal.html', locals())
-    if username & email:
-        models.User.objects.filter(id=user_id).update(username=username,email=email)
-    elif email:
-        models.User.objects.filter(id=user_id).update(email=email)
-    else:
-        models.User.objects.filter(id=user_id).update(username=username)
+
 def personal_pwd(requests):
     user_id = requests.session.get('user_id')
     pwd=requests.GET('pwd')
