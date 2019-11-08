@@ -59,22 +59,26 @@
 			layui.use(['table', 'layer'], function() {
 				var table = layui.table;
 				var layer = layui.layer;
+				var Search_history="{% url "Search_history"%}"
 				table.render({
 					elem: '#history-data',
 					limit: 20,
 					even: true,
-					url: './api.json', //数据接口
-					page: true, //开启分页
+					url: Search_history, //数据接口
+                    success: function(data) {
+					    alert(data)
+                    },
+					page: true, //开启分页iconfont.ttf
 					cols: [
 						[ //表头
 							{
 								field: 'title',
-								title: '标题',
+								title: '搜索历史',
 								width: 200,
 								fixed: 'left'
 							}, {
 								field: 'time',
-								title: '收藏时间',
+								title: '搜索时间',
 								width: 200,
 								sort: true
 							}, {
@@ -96,17 +100,19 @@
 					var layEvent = obj.event;
 					if (layEvent === 'delete') {
 						// 执行ajax删除
+                        var delete_search="{% url  'delete_search' %}"
 						$.ajax({
-							url: "##",
+							url: delete_search,
 							type: 'POST',
 							data: data,
 							success: function(data) {
 								//删除成功
-								if (data.status === '0') {
+								if (data.message === 'ok') {
 									obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 								}
 								//删除失败
-								if (data.status === '-1') {
+								if (data.message === 'error') {
+								    alert(data.message)
 									layer.msg('删除失败', {
 										time: 2000
 									});

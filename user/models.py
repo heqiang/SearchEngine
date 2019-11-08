@@ -19,7 +19,7 @@ class  User(models.Model):
     job=models.CharField(max_length=128,blank=True)
     description=models.TextField(blank=True)
     createtime=models.DateTimeField(auto_now_add=True)
-    headimg=models.FileField(upload_to="headimg",blank=True)
+    headimg=models.ImageField(upload_to="headimg",blank=True)
 
 
 class  Collect(models.Model):
@@ -30,5 +30,5 @@ class  Collect(models.Model):
 class Search(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     searchtitle = models.CharField(max_length=255)
-    searchurl = models.CharField(max_length=128,blank=True)
+    searchurl = models.CharField(max_length=128,blank=True,default="null")
     searchtime = models.DateTimeField(auto_now_add=True)

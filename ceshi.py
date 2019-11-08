@@ -1,6 +1,7 @@
-# import time
-# import re
-# import datetime
+import time
+import re
+import datetime
+import pymysql
 # firsttime=time.strftime("%Y-%m-%d", time.localtime())
 # lasttime=time.strftime("%H:%M:%S", time.localtime())
 # new_firsttime=firsttime.split("-")
@@ -31,3 +32,21 @@
 #     new_time=datetime.datetime.strptime(PublishTime,"%Y-%m-%d %H:%M:%S")
 #     print(new_time)
 # #
+conn=pymysql.connect(
+    host='localhost',
+    user='root',
+    password='1422127065',
+    db='bishe',
+    charset="utf8"
+
+
+)
+cur=conn.cursor()
+delete_sql= "delete from user_search where id={0}".format(43)
+res=cur.execute(delete_sql)
+if res>0:
+    print("ok")
+else:
+    print("error")
+conn.commit()
+conn.close()

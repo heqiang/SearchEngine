@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse
+from  django.http import JsonResponse
 from django.views.generic.base import View
 from search.models import ArticType,TechnologyType
 import json
@@ -13,7 +14,7 @@ import time
 
 current_time=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 client=Elasticsearch(hosts=["127.0.0.1"])
-db = pymysql.connect("localhost","root","1422127065","bishe" )
+db = pymysql.connect("localhost","root","1422127065","bishe" ,charset="utf8" )
 cursor = db.cursor()
 
 redis_cli=redis.StrictRedis()
@@ -120,4 +121,52 @@ def SearchView(request):
                                                  "last_seconds":last_seconds,
                                                   "topn_search": new_topn_search,
                                                 })
+
+def  Search_history(requests):
+    user_id = requests.session.get('user_id')
+    res=models.Search.objects.filter(user_id=user_id).values("id","searchtitle","searchurl","searchtime")
+    dict=[]
+    for x in res:
+        data={}
+        data['id'] = x['id']
+        data['title']=x['searchtitle']
+        data['time']=x['searchtime'].strftime('%Y-%m-%d %H:%M:%S')
+        data['url']=x['searchurl']
+        dict.append(data)
+    return JsonResponse({"code": 0, "message:": "", "count": len(res),
+                         "data":dict})
+
+#删除搜索历史记录
+def  delete_search(requests):
+     if requests.is_ajax():
+         id=requests.POST['id']
+         print("删除的id:"+str(id))
+         res=models.Search.objects.filter(id=id).delete()
+         print(res)
+         if res:
+             return JsonResponse({"message":"ok"})
+         else:
+             return JsonResponse({"message":"error"})
+def  collect_history(requests):
+    user_id = requests.session.get('user_id')
+    res = models.Collect.objects.filter(user_id=user_id).values("id", "collecttitle", "collecturl", "collecttime")
+    dict = []
+    for x in res:
+        data = {}
+        data['id'] = x['id']
+        data['title'] = x['collecttitle']
+        data['time'] = x['collecttime'].strftime('%Y-%m-%d %H:%M:%S')
+        data['url'] = x['collecturl']
+        dict.append(data)
+    return JsonResponse({"code": 0, "message:": "", "count": len(res),
+                         "data": dict})
+
+def  delete_collect(requests):
+    if requests.is_ajax():
+        id = requests.POST['id']
+        res = models.Collect.objects.filter(id=id).delete()
+        if res:
+            return JsonResponse({"message": "ok"})
+        else:
+            return JsonResponse({"message": "error"})
 

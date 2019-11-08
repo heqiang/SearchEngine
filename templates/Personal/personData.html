@@ -167,16 +167,21 @@
 									<div class="person_avator">
 										<img src="{% static "image/head.jpg" %}" class="avator">
 									</div>
-									<input type="file" class="avator-file" />
-									<p class="change_avator">点击更换头像</p>
+                                    <form  class='avator-avator' action="{% url 'upload'  %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="file" class="avator-file" accept="image/*" name="avator"/>
+
+{#                                        <BUTTON type="submit" value="更换头像">点击更换头像</BUTTON>#}
+                                    </form>
+                                     <p class="change_avator" >点击更换头像</p>
 								</div>
 								<div class="person_data">
 									<ul>
 										<li><span>收藏：</span>
-											<div class="person_data_info">23</div>
+											<div class="person_data_info">10</div>
 										</li>
 										<li><span>浏览：</span>
-											<div class="person_data_info"></div>
+											<div class="person_data_info">11</div>
 										</li>
 										<li><span>昵称：</span>
 											<div class="person_data_info">{{ request.session.user_name }}</div>
@@ -251,7 +256,7 @@
 			</form>
 		</body>
 		<script src={% static "layui/layui.js" %}></script>
-		<script src={% static "js/jquery-3.4.1.js" %}></script>
+		<script src={% static "js/jquery-3.4.1.js"%}></script>
 		<script>
 
 			layui.use(['element', 'layer', 'form'], function() {
@@ -271,7 +276,7 @@
 						method: 'POST',
 						data: data.field,
 						success: function(data) {
-
+                            alert(data.message)
 							if (data.message =='ok') {
 								layer.msg('修改成功', {
 									time: '1000',
@@ -294,51 +299,22 @@
 			var newPw = $(".new-pw");
 			var renewPw = $(".renew-pw");
 			var formIndex;
+			var upload="{% url 'upload' %}"
 			// 图片上传
 			$('.avator-file').change(function(e) {
-				var files = e.target.files[0];
-				var fd = FormData();
-				if (files) {
-					var rFilter =
-						/^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-					if (!rFilter.test(files.type)) {
-						layer.msg('请上传图片', {
-							time: '1000'
-						});
-					} else {
-						var reader = new FileReader();
-						reader.onload = (function(file) {
-							return function(e) {
-								var datainfo = this.result;
-								$(".avator").attr({
-									"src": datainfo,
-								});
-							};
-						})(e.target.files[0]);
-						reader.readAsDataURL(e.target.files[0]);
-						// 添加到fd对象中等待提交
-						fd.append("cert_scan", e.target.files[0]);
-						$.ajax({
-							url: "xxxx/xxxxx",
-							method: "POST",
-							data: fd,
-							success: function(data) {
-								infor_notice(data.code, data.message);
-								if (data.status === '0') {
-									layer.msg('上传成功', {
-										time: '1000'
-									});
-								} else {
-									layer.msg('上传失败', {
-										time: '1000'
-									});
-								}
-							}
-						})
-
-					}
-				}
-			});
+                var files = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = (function(file) {
+                 return function(e) {
+                  var datainfo = this.result;
+                  $(".avator").attr({
+                   "src": datainfo,
+                  });
+                 };
+                })(e.target.files[0]);
+                reader.readAsDataURL(e.target.files[0]);
+                $('.avator-avator').submit();
+            })
 
 			$('.cancel').click(function() {
 				layer.close(formIndex);

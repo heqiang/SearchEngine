@@ -3,9 +3,9 @@ from django.shortcuts import  redirect
 from user import  models
 from user import forms
 import hashlib
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 import pymysql
-
+from django.contrib.auth.decorators import login_required
 
 conn=pymysql.connect(
     host='localhost',
@@ -16,7 +16,7 @@ conn=pymysql.connect(
 
 
 )
-cursor=conn.cursor()
+cur=conn.cursor()
 
 #登录逻辑
 def login(requests):
@@ -30,11 +30,8 @@ def login(requests):
         if login_form.is_valid():
             username=login_form.cleaned_data.get("username")
             password = hashlib.sha1(login_form.cleaned_data.get("password").encode('utf-8')).hexdigest()
-            print(password)
             try:
                 user= models.User.objects.get(username=username)
-                print("当前用户状态"+"\n")
-                print(user)
             except:
                 message="用户不存在"
                 return render(requests,'login/login.html',locals())
@@ -119,51 +116,40 @@ def change(requests):
         else:
             get_email=models.User.objects.filter(email=email)
             if get_email:
-                message="email"
+                message="email is nor valid"
                 return JsonResponse({"message":message})
             else:
                 message="ok"
-                update_sql="UPDATE user_user set username='{0}',email='{1}',description='{2}' where id='{3}'".format(username,email,des,user_id)
+                models.User.objects.filter(id=user_id).update(username=username,email=email,description=des)
+                # update_sql="UPDATE user_user set username='{0}',email='{1}',description='{2}' where id='{3}'".format(username,email,des,user_id)
                 requests.session['user_name'] = username
                 requests.session['email'] = email
                 requests.session['des'] = des
-                cursor.execute(update_sql)
-                conn.commit()
-                conn.close()
                 return JsonResponse({"message":message})
 
-#检查前端床过来的密码是否正确
+#检查前端传过来的密码是否正确
 def check_pwd(requests):
     if requests.is_ajax():
         data=requests.POST['pwd'] #获取前端传过来的密码
         user_id = requests.session.get('user_id')
         pwd=hashlib.sha1(data.encode('utf-8')).hexdigest()#对密码进行加密
-        pwd_sq="select password from user_user  where id='{0}'".format(user_id)#获取当前用户的数据库密码
-        cursor.execute(pwd_sq)
-
-        userpwd = cursor.fetchone()
-        if str(userpwd[0])==str(pwd):
-            return JsonResponse({ "message":"ok"})
+        #查询当前用户的密码
+        database_pwd=models.User.objects.get(id=user_id).password
+        if str(pwd)==str(database_pwd):
+            return JsonResponse({"message": "ok"})
         else:
             return JsonResponse({"message": "密码错误"})
-        conn.commit()
-        conn.close()
+
 def change_password(requests):
         if requests.is_ajax():
             user_id = requests.session.get('user_id')
             data=requests.POST['newPw']
             pwd = hashlib.sha1(data.encode('utf-8')).hexdigest()
-            change_pwd_sql="UPDATE user_user set password='{0}' where id='{1}'".format(pwd,user_id)
-
-            res=cursor.execute(change_pwd_sql)
-
-            if res==1:
+            res=models.User.objects.filter(id=user_id).update(password=pwd)
+            if res == 1:
                 return JsonResponse({"status":'0'})
             else:
-                print(res)
-            conn.commit()
-            conn.close()
-
+                return JsonResponse({"status": '1'})
 
 
 
@@ -173,9 +159,6 @@ def Search_article(requests):
     searchurl=requests.GET('url',"")
     user_id=requests.session.get('user_id')
     models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
-
-
-
 
 #文章收藏 #需要登录获取当前作者的id  需要传递url，title
 def Collect_article(requests):
@@ -203,7 +186,17 @@ def personal_pwd(requests):
     return  render(requests,"personal.html",{"res":"修改成功"})
 
 
+def  upload(requests):
+    if requests.method=="POST":
+        avatar = requests.FILES.get('avator')
+        with open("headimg/"+avatar.name, 'wb') as f:
+            for line in avatar:
+                f.write(line)
+                message="ok"
+        return render(requests,"Personal/personData.html",locals())
 
+
+#路由控制
 def personData(requests):
     return render(requests,"Personal/personData.html")
 def collection(requests):
