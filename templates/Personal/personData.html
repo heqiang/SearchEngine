@@ -134,7 +134,7 @@
                 </li>
 
                     <li class="layui-nav-item">
-                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                        <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
                     </li>
 
                     <li class="layui-nav-item">
@@ -165,7 +165,7 @@
 							<div class="person_wrapper">
 								<div class="person_avator_wrapper">
 									<div class="person_avator">
-										<img src="{% static "image/head.jpg" %}" class="avator">
+										<img src="{{head_imgpath}}" class="avator">
 									</div>
                                     <form  class='avator-avator' action="{% url 'upload'  %}" method="post" enctype="multipart/form-data">
                                         {% csrf_token %}

@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from user import views
+from BS_Search import settings
+
 
 urlpatterns=[
 
@@ -18,5 +20,6 @@ urlpatterns=[
     url(r'^change/$',views.change,name='change'),#个人基础信息更改
     url(r'^check_pwd/$',views.check_pwd,name='check_pwd'),#密码检查
     url(r'^change_password/$',views.change_password,name='change_password'),#密码修改
-    url(r'^upload/$',views.upload,name='upload')#头像上传
+    url(r'^upload/$',views.upload,name='upload'),#头像上传
+
 ]

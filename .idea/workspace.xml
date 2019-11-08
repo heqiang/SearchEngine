@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad707256-8dcb-4744-b2cd-02d6e2337e19" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/static/layui/font/iconfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/font/iconfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/font/iconfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/font/iconfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layui/font/iconfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/head1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BS_Search/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BS_Search/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ceshi.py" beforeDir="false" afterPath="$PROJECT_DIR$/ceshi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Personal/collection.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Personal/collection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BS_Search/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BS_Search/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/head.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/head.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headimg/head.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Personal/personData.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Personal/personData.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Personal/searchHistory.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Personal/searchHistory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
@@ -38,6 +30,7 @@
     <SUITE FILE_PATH="coverage/BS_Search$xicidaili__2_.coverage" NAME="xicidaili (2) Coverage Results" MODIFIED="1572847794249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/tools" />
     <SUITE FILE_PATH="coverage/BS_Search$xicidaili.coverage" NAME="xicidaili Coverage Results" MODIFIED="1571486588474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/Proxy/getproxy" />
     <SUITE FILE_PATH="coverage/BS_Search$xicidaili__1_.coverage" NAME="xicidaili (1) Coverage Results" MODIFIED="1572831833318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/Tools" />
+    <SUITE FILE_PATH="coverage/BS_Search$urls.coverage" NAME="urls Coverage Results" MODIFIED="1573213959568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BS_Search" />
     <SUITE FILE_PATH="coverage/BS_Search$kuaidaili.coverage" NAME="kuaidaili Coverage Results" MODIFIED="1572848006547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/tools" />
   </component>
   <component name="DatabaseView">
@@ -67,11 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="189" column="31" lean-forward="true" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
+            <state>
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -79,16 +72,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="head.jpg" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/headimg/head.jpg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+            <state relative-caret-position="-56">
+              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,8 +87,20 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BS_Search/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1129">
-              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+            <state relative-caret-position="290">
+              <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BS_Search/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+              <folding>
+                <element signature="e#633#665#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,23 +108,8 @@
       <file leaf-file-name="personData.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/Personal/personData.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="177" column="57" lean-forward="true" selection-start-line="177" selection-start-column="57" selection-end-line="177" selection-end-column="57" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#body#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="207">
+              <caret line="137" column="25" lean-forward="true" selection-start-line="137" selection-start-column="25" selection-end-line="137" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -187,7 +175,6 @@
         <option value="$PROJECT_DIR$/../../python3.6.5/Lib/site-packages/django/db/backends/mysql/base.py" />
         <option value="$PROJECT_DIR$/search/models.py" />
         <option value="$PROJECT_DIR$/templates/login/register.py" />
-        <option value="$PROJECT_DIR$/BS_Search/urls.py" />
         <option value="$PROJECT_DIR$/templates/login/login.html" />
         <option value="$PROJECT_DIR$/user/admin.py" />
         <option value="$PROJECT_DIR$/static/css/register.css" />
@@ -229,9 +216,10 @@
         <option value="$PROJECT_DIR$/templates/Personal/collection.html" />
         <option value="G:/1422127065/FileRecv/scratch_1.py" />
         <option value="$PROJECT_DIR$/search/views.py" />
-        <option value="$PROJECT_DIR$/user/urls.py" />
         <option value="$PROJECT_DIR$/user/models.py" />
         <option value="$PROJECT_DIR$/BS_Search/settings.py" />
+        <option value="$PROJECT_DIR$/user/urls.py" />
+        <option value="$PROJECT_DIR$/BS_Search/urls.py" />
         <option value="$PROJECT_DIR$/templates/Personal/personData.html" />
         <option value="$PROJECT_DIR$/user/views.py" />
       </list>
@@ -244,9 +232,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="y" value="20" />
-    <option name="width" value="1680" />
-    <option name="height" value="1080" />
+    <option name="x" value="98" />
+    <option name="y" value="22" />
+    <option name="width" value="1604" />
+    <option name="height" value="943" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -256,6 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,7 +256,17 @@
             <path>
               <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
               <item name="headimg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
@@ -276,13 +276,29 @@
             <path>
               <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="image" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Personal" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,19 +311,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\pycharm\BiYeSheJi\BS_Search\media" />
+      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\layui\css" />
+      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static" />
+      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\js" />
+      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\img" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\layui" />
       <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\image" />
       <recent name="F:\pycharm\BiYeSheJi\BS_Search\Spider\Spider" />
       <recent name="F:\pycharm\BiYeSheJi\BS_Search\Spider\Spider\Spider_Model" />
       <recent name="F:\pycharm\BiYeSheJi\BS_Search\templates\login" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\layui\css" />
-      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static" />
-      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\js" />
-      <recent name="F:\pycharm\BiYeSheJi\BS_Search\static\img" />
-      <recent name="F:\pycharm\BiYeSheJi\BS_Search\templates\Personal" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -322,7 +338,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_1">
+  <component name="RunManager" selected="Python.urls">
     <configuration name="ceshi" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BS_Search" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -361,25 +377,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="qiyundaili" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="BS_Search" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Spider/Spider/tools" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Spider/Spider/tools/qiyundaili.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="scratch_1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BS_Search" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -394,6 +391,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="G:/1422127065/FileRecv/scratch_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="urls" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BS_Search" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BS_Search" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BS_Search/urls.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -444,18 +460,18 @@
     <list>
       <item itemvalue="Django server.BS_Search" />
       <item itemvalue="Python.xicidaili (2)" />
-      <item itemvalue="Python.qiyundaili" />
       <item itemvalue="Python.kuaidaili" />
       <item itemvalue="Python.ceshi" />
       <item itemvalue="Python.scratch_1" />
+      <item itemvalue="Python.urls" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.urls" />
         <item itemvalue="Python.scratch_1" />
         <item itemvalue="Python.ceshi" />
         <item itemvalue="Python.kuaidaili" />
         <item itemvalue="Python.xicidaili (2)" />
-        <item itemvalue="Python.qiyundaili" />
       </list>
     </recent_temporary>
   </component>
@@ -473,7 +489,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="17" width="1344" height="864" extended-state="0" />
+    <frame x="382" y="34" width="1283" height="754" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -481,9 +497,9 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.6645866" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.53061223" />
-      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.5336323" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8009331" visible="true" weight="0.18506998" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.08589952" />
+      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.2984375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8009331" visible="true" weight="0.19836734" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" visible="true" weight="0.0" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -492,34 +508,34 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.47572815" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.029871978" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13524264" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.35444948" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.329429" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4503597" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.31196582" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.329429" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,9 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding>
-            <element signature="e#15#45#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,58 +827,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/head.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/head.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/BS_Search/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1129">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+        <state relative-caret-position="290">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/models.py">
+    <entry file="file://$PROJECT_DIR$/BS_Search/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        <state relative-caret-position="145">
+          <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+          <folding>
+            <element signature="e#633#665#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/head.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/user/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Personal/personData.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="177" column="57" lean-forward="true" selection-start-line="177" selection-start-column="57" selection-end-line="177" selection-end-column="57" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="207">
+          <caret line="137" column="25" lean-forward="true" selection-start-line="137" selection-start-column="25" selection-end-line="137" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="189" column="31" lean-forward="true" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
+        <state>
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headimg/2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headimg/head.jpg">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

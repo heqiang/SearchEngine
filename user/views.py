@@ -186,14 +186,18 @@ def personal_pwd(requests):
     return  render(requests,"personal.html",{"res":"修改成功"})
 
 
+
 def  upload(requests):
     if requests.method=="POST":
+        username=requests.session.get('user_name')
         avatar = requests.FILES.get('avator')
-        with open("headimg/"+avatar.name, 'wb') as f:
+        with open("media/"+avatar.name, 'wb') as f:
             for line in avatar:
                 f.write(line)
-                message="ok"
-        return render(requests,"Personal/personData.html",locals())
+        head_imgpath="media/%s"%(avatar)
+        print(head_imgpath)
+        models.User.objects.filter(username=username).update(headimg=head_imgpath)
+    return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
 
 
 #路由控制
