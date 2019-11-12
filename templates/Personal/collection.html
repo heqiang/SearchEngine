@@ -13,11 +13,11 @@
 			<div class="layui-header">
 				<ul class="layui-nav">
                 <li class="layui-nav-item">
-                    <a href="/index/">Search</a>
+                    <a href="{% url 'result' %}">Search</a>
                 </li>
 
                     <li class="layui-nav-item">
-                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                        <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
                     </li>
 
                     <li class="layui-nav-item">
@@ -67,7 +67,7 @@
 							}, {
 								field: 'url',
 								title: '链接',
-								templet: '<div><a href="{{d.url}}" class="layui-table-link">{{d.url}}</a></div>'
+								{#templet: '<div><a href="{{d.url }}" class="layui-table-link">{{ d.url  }}</a></div>'#}
 							}, {
 								field: 'action',
 								title: '操作',
@@ -83,8 +83,9 @@
 					var layEvent = obj.event;
 					if (layEvent === 'delete') {
 						// 执行ajax删除
+                        var  delete_collect="{% url "delete_collect" %}"
 						$.ajax({
-							url: "##",
+							url: delete_collect,
 							type: 'POST',
 							data: data,
 							success: function(data) {

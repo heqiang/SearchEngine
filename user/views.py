@@ -3,20 +3,7 @@ from django.shortcuts import  redirect
 from user import  models
 from user import forms
 import hashlib
-from django.http import JsonResponse,HttpResponse
-import pymysql
-from django.contrib.auth.decorators import login_required
-
-conn=pymysql.connect(
-    host='localhost',
-    user='root',
-    password='1422127065',
-    db='bishe',
-    charset="utf8"
-
-
-)
-cur=conn.cursor()
+from django.http import JsonResponse
 
 #登录逻辑
 def login(requests):
@@ -94,7 +81,7 @@ def register(request):
             return render(request, 'login/register.html', locals())
     register_form = forms.RegisterForm()
     return render(request, 'login/register.html', locals())
-
+#注销 清楚sesion
 def logout(requests):
     #清除session  若是没有登录就直接跳转到登录页面,若是登录了在跳转到登出则跳转至文章页面
     if not requests.session.get('is_login', None):
@@ -121,7 +108,6 @@ def change(requests):
             else:
                 message="ok"
                 models.User.objects.filter(id=user_id).update(username=username,email=email,description=des)
-                # update_sql="UPDATE user_user set username='{0}',email='{1}',description='{2}' where id='{3}'".format(username,email,des,user_id)
                 requests.session['user_name'] = username
                 requests.session['email'] = email
                 requests.session['des'] = des
@@ -150,8 +136,6 @@ def change_password(requests):
                 return JsonResponse({"status":'0'})
             else:
                 return JsonResponse({"status": '1'})
-
-
 
 #文章浏览  需要登录获取当前作者的id 需要传递url，title
 def Search_article(requests):
@@ -195,19 +179,28 @@ def  upload(requests):
             for line in avatar:
                 f.write(line)
         head_imgpath="media/%s"%(avatar)
-        print(head_imgpath)
         models.User.objects.filter(username=username).update(headimg=head_imgpath)
     return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
 
-
 #路由控制
 def personData(requests):
-    return render(requests,"Personal/personData.html")
+    if requests.session.get('is_login', None):
+        id = requests.session.get('user_id')
+        head_imgpath=models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+        return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
+    else:
+        return redirect("/login/")
 def collection(requests):
-    return render(requests,"Personal/collection.html")
+    id = requests.session.get('user_id')
+    head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+    return render(requests,"Personal/collection.html",{"head_imgpath":"../"+head_imgpath})
 def searchHistory(requests):
-    return render(requests,"Personal/searchHistory.html")
+    id = requests.session.get('user_id')
+    head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+    return render(requests,"Personal/searchHistory.html",{"head_imgpath":"../"+head_imgpath})
 def dataAnalysis(requests):
-    return render(requests,"Personal/dataAnalysis.html")
+    id = requests.session.get('user_id')
+    head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+    return render(requests,"Personal/dataAnalysis.html",{"head_imgpath":"../"+head_imgpath})
 
 

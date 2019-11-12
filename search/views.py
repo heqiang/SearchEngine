@@ -1,22 +1,18 @@
 from django.shortcuts import render,HttpResponse
 from  django.http import JsonResponse
-from django.views.generic.base import View
+from django.shortcuts import  redirect
 from search.models import ArticType,TechnologyType
 import json
 from elasticsearch import Elasticsearch
 from datetime import datetime
 import redis
 import pymysql
-from user import forms
 from user import  models
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-import time
 
 current_time=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-client=Elasticsearch(hosts=["127.0.0.1"])
 db = pymysql.connect("localhost","root","1422127065","bishe" ,charset="utf8" )
 cursor = db.cursor()
-
+client=Elasticsearch(hosts=["127.0.0.1"])
 redis_cli=redis.StrictRedis()
 
 def  IndexView(request):
@@ -25,11 +21,93 @@ def  IndexView(request):
     for x in topn_search:
         new_topn_search.append(x.decode(encoding='utf-8'))
     return render(request,'index.html',{"new_topn_search":new_topn_search})
-def Result(requests):
 
-    return render(requests,"result.html")
-def SearchSuggest(request):                                      # 搜索自动补全逻辑处理
-    key_words = request.GET.get('s', '')# 获取到请求词
+#跳转搜索结果页面时 如果登录了 就以登录者搜索的最新一条为搜索返回内容，否则以热搜的最新一条返回搜索结果
+def Result(requests):
+    if requests.session.get('is_login', None):
+        user_id = requests.session.get('user_id')
+        res=models.Search.objects.filter(user_id=user_id).values("searchtitle","searchtime").order_by("-searchtime")
+        if  res:
+            key_words=res[0]['searchtitle']
+    else:
+        res=models.Hot_search.objects.values("searchtitle","searchtime").order_by("-searchtime")
+        if res:
+            key_words=res[0]['searchtitle']
+    models.Hot_search.objects.create(Hot_searchtitle=key_words)
+    redis_cli.zincrby("search_keywords_set", 1, key_words)
+    topn_search = redis_cli.zrevrangebyscore("search_keywords_set", "+inf", "-inf", start=0, num=5)
+
+    # 热门搜索
+    new_topn_search = []
+    for x in topn_search:
+        new_topn_search.append(x.decode(encoding='utf-8'))
+    page = requests.GET.get("p", "2")
+    try:
+        page = int(page)
+    except:
+        page = 1
+    start_time = datetime.now()
+    response = client.search(
+        index="technology",
+        body={
+            "query": {
+                "multi_match": {
+                    "query": key_words,
+                    "fields": ["title", "tags", "content"]
+                }
+            },
+            "from": (page - 1) * 10,  # 从多少条开始获取
+            "size": 10,  # 获取多少条数据
+            "highlight": {  # 查询关键词高亮处理
+                # 样式控制
+                "pre_tags": ['<span class="keyWord">'],  # 高亮开始标签
+                "post_tags": ['</span>'],  # 高亮结束标签
+                "fields": {  # 高亮设置
+                    "title": {},  # 高亮字段
+                    "content": {}  # 高亮字段
+                }
+            }
+        }
+    )
+    end_time = datetime.now()
+    last_seconds = (end_time - start_time).total_seconds()
+    total_nums = response["hits"]["total"]  # 返回总的条数
+    if total_nums > 10:
+        page_nums = int(total_nums / 10) + 1
+    else:
+        page_nums = int(total_nums / 10)
+    all_list = []
+    # 10条
+    for hit in response["hits"]["hits"]:
+        hit_dict = {}
+        if "highlight" in hit:
+            if "title" in hit["highlight"]:
+                hit_dict["title"] = "".join(hit["highlight"]["title"])
+            else:
+                hit_dict["title"] = ''.join(hit["_source"]["title"])
+            if "content" in hit["highlight"]:
+                hit_dict["content"] = "".join(hit["highlight"]["content"][:500])
+            else:
+                hit_dict["content"] = "".join(hit["_source"]["content"][:500])
+            hit_dict["time"] = hit['_source']["time"]
+            hit_dict["url"] = hit['_source']["link_url"]
+            hit_dict["score"] = hit["_score"]
+            hit_dict["source"] = hit['_source']["source"]
+            # 将内容加入到list
+            all_list.append(hit_dict)
+    return render(requests, "result.html", {"all_list": all_list,
+                                           "key_words": key_words,
+                                           "total_nums": total_nums,  # 数据总条数
+                                           "page": page,  # 当前页码
+                                           "page_nums": page_nums,  # 页数
+                                           "last_seconds": last_seconds,
+                                           "topn_search": new_topn_search,
+                                           })
+
+
+
+def SearchSuggest(request):  # 搜索自动补全逻辑处理
+    key_words = request.GET.get('s', '') # 获取到请求词
     re_datas = []
     if key_words:
         s = TechnologyType.search()
@@ -50,20 +128,19 @@ def SearchView(request):
         if request.session.get('is_login',None):
             user_id=request.session.get('user_id')
             models.Search.objects.create(searchtitle=key_words,user_id=user_id)
-
+        models.Hot_search.objects.create(Hot_searchtitle=key_words)
         redis_cli.zincrby("search_keywords_set", 1,key_words)
         topn_search = redis_cli.zrevrangebyscore("search_keywords_set", "+inf", "-inf", start=0, num=5)
+
         #热门搜索
         new_topn_search=[]
         for x  in topn_search:
             new_topn_search.append(x.decode(encoding='utf-8'))
-
         page = request.GET.get("p", "2")
         try:
             page = int(page)
         except:
             page = 1
-
         start_time=datetime.now()
         response=client.search(
             index="technology",
@@ -87,15 +164,15 @@ def SearchView(request):
                 }
             }
         )
-        print(len(response))
         end_time=datetime.now()
         last_seconds=(end_time-start_time).total_seconds()
         total_nums = response["hits"]["total"] #返回总的条数
         if total_nums>10:
             page_nums=int(total_nums/10)+1
         else:
-            page_nums=int(total_nums/10)
+                page_nums=int(total_nums/10)
         all_list=[]
+        #10条
         for hit  in response["hits"]["hits"]:
               hit_dict = {}
               if "highlight" in hit:
@@ -140,9 +217,7 @@ def  Search_history(requests):
 def  delete_search(requests):
      if requests.is_ajax():
          id=requests.POST['id']
-         print("删除的id:"+str(id))
          res=models.Search.objects.filter(id=id).delete()
-         print(res)
          if res:
              return JsonResponse({"message":"ok"})
          else:
@@ -158,6 +233,7 @@ def  collect_history(requests):
         data['time'] = x['collecttime'].strftime('%Y-%m-%d %H:%M:%S')
         data['url'] = x['collecturl']
         dict.append(data)
+
     return JsonResponse({"code": 0, "message:": "", "count": len(res),
                          "data": dict})
 

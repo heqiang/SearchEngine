@@ -14,11 +14,11 @@
 
             <ul class="layui-nav">
                 <li class="layui-nav-item">
-                    <a href="/index/">Search</a>
+                    <a href="{% url 'result' %}">Search</a>
                 </li>
 
                     <li class="layui-nav-item">
-                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                        <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
                     </li>
 
                     <li class="layui-nav-item">

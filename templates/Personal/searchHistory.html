@@ -6,32 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title></title>
 		<link rel="stylesheet" type="text/css" href={% static "layui/css/layui.css"  %}/>
-         <style>
-            .loginout{
-               position:absolute;
-               right:0;
-               top:0;
-               width:00px;
-               height:100%;
-               line-height:60px;
-               text-align:center;
-               color:#009688;
-               font-size:16px
-            }
-
-
-        </style>
 	</head>
 	<body class="layui-layout-body">
 		<div class="layui-layout layui-layout-admin">
 			<div class="layui-header">
             <ul class="layui-nav">
                 <li class="layui-nav-item">
-                    <a href="/index/">Search</a>
+                    <a href="{% url 'result' %}">Search</a>
                 </li>
 
                     <li class="layui-nav-item">
-                        <a href=""><img src="{% static "image/head.jpg" %}" class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                        <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
                     </li>
 
                     <li class="layui-nav-item">
@@ -66,7 +51,7 @@
 					even: true,
 					url: Search_history, //数据接口
                     success: function(data) {
-					    alert(data)
+                            alert(data)
                     },
 					page: true, //开启分页iconfont.ttf
 					cols: [
@@ -84,7 +69,7 @@
 							}, {
 								field: 'url',
 								title: '链接',
-								templet: '<div><a href="{{d.url}}" class="layui-table-link">{{d.url}}</a></div>'
+								{#templet: '<div><a href="{{d.url}}" class="layui-table-link">{{d.url}}</a></div>'#}
 							}, {
 								field: 'action',
 								title: '操作',

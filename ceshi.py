@@ -2,6 +2,8 @@ import time
 import re
 import datetime
 import pymysql
+import jieba
+from elasticsearch import Elasticsearch
 # firsttime=time.strftime("%Y-%m-%d", time.localtime())
 # lasttime=time.strftime("%H:%M:%S", time.localtime())
 # new_firsttime=firsttime.split("-")
@@ -32,21 +34,21 @@ import pymysql
 #     new_time=datetime.datetime.strptime(PublishTime,"%Y-%m-%d %H:%M:%S")
 #     print(new_time)
 # #
+client=Elasticsearch(hosts=["127.0.0.1"])
 conn=pymysql.connect(
     host='localhost',
     user='root',
     password='1422127065',
     db='bishe',
     charset="utf8"
-
-
 )
 cur=conn.cursor()
-delete_sql= "delete from user_search where id={0}".format(43)
-res=cur.execute(delete_sql)
-if res>0:
-    print("ok")
-else:
-    print("error")
-conn.commit()
+select_sql="select searchtitle from  user_search where user_id=11"
+cur.execute(select_sql)
+for x in cur.fetchall():
+    print(x[0])
+    seg_list=jieba.cut_for_search(x[0])
+    for i in seg_list:
+        print(i)
 conn.close()
+
