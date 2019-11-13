@@ -63,9 +63,10 @@
                 <div class="resultList">
 
                     {% for hit in all_list %}
+
                     <div class="resultItem">
                             <div class="itemHead">
-                                <a href="{{ hit.url }}"  target="_blank" class="title" >{% autoescape off %}{{ hit.title }}{% endautoescape %}</a>
+                                <a href="{{ hit.url }}"  target="_blank" class="title" id="collect">{% autoescape off %}{{ hit.title }}{% endautoescape %}</a>
                                 <span class="divsion">-</span>
 {#                                <span class="fileType">#}
 {#                                    <span class="label">来源：</span>#}
@@ -76,7 +77,7 @@
 {#                                    <span class="value">{{ hit.score }}</span>#}
                                 </span>
                             <span class="dependValue">
-                                    <span class="label">收藏</span>
+                                    <span class="label collect"  onclick="handleCollect({{hit}})">收藏</span>
                                 </span>
                             </div>
                             <div class="itemBody">
@@ -147,7 +148,25 @@
 <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/pagination.js' %}"></script>
 
+<script>
+        function handleCollect(data){
 
+         var collection_article="{% url  'collection_article' %}"
+
+          $.ajax({
+           url:collection_article,
+           type:'POST',
+           data:{"url":data.url,"title":data.title},
+           success:function (data) {
+            if(data.status==='0'){
+             alert("收藏成功")
+            }else{
+             alert("已收藏")
+            }
+           }
+          });
+         }
+</script>
 
 <script type="text/javascript">
     var search_url = "{% url 'search' %}"

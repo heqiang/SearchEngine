@@ -4,7 +4,9 @@ from user import  models
 from user import forms
 import hashlib
 from django.http import JsonResponse
-
+import jieba.analyse
+from collections import Counter
+import re
 #登录逻辑
 def login(requests):
     if requests.session.get('is_login', None):  # 不允许重复登录
@@ -137,39 +139,6 @@ def change_password(requests):
             else:
                 return JsonResponse({"status": '1'})
 
-#文章浏览  需要登录获取当前作者的id 需要传递url，title
-def Search_article(requests):
-    searchtitle=requests.GET('title',"")
-    searchurl=requests.GET('url',"")
-    user_id=requests.session.get('user_id')
-    models.Search.objects.create(searchtitle=searchtitle,searchurl=searchurl,user_id=user_id)
-
-#文章收藏 #需要登录获取当前作者的id  需要传递url，title
-def Collect_article(requests):
-    collecttitle = requests.GET('title', "")
-    collecturl = requests.GET('url', "")
-    user_id = requests.session.get('user_id')
-    models.Collect.objects.create(collecttitle=collecttitle,collecturl=collecturl,user_id=user_id)
-#查看个人中心的收藏记录  user_id
-
-#返回的页面需要修改
-def personal_collect(requests):
-    user_id = requests.session.get('user_id')
-    all_collect=models.Collect.objects.filter(user_id=user_id)
-    return  render(requests,"personal.html",{"all_collect":all_collect})
-# 查看个人中心的浏览记录  user_id
-def personal_search(requests):
-    user_id = requests.session.get('user_id')
-    all_search = models.Search.objects.filter(user_id=user_id)
-    return render(requests, "personal.html", {"all_collect": all_search})
-
-def personal_pwd(requests):
-    user_id = requests.session.get('user_id')
-    pwd=requests.GET('pwd')
-    models.User.objects.filter(user_id=user_id).update(password=pwd)
-    return  render(requests,"personal.html",{"res":"修改成功"})
-
-
 
 def  upload(requests):
     if requests.method=="POST":
@@ -190,7 +159,9 @@ def personData(requests):
         return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
     else:
         return redirect("/login/")
+
 def collection(requests):
+
     id = requests.session.get('user_id')
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
     return render(requests,"Personal/collection.html",{"head_imgpath":"../"+head_imgpath})
@@ -201,6 +172,56 @@ def searchHistory(requests):
 def dataAnalysis(requests):
     id = requests.session.get('user_id')
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
-    return render(requests,"Personal/dataAnalysis.html",{"head_imgpath":"../"+head_imgpath})
+    search_title=models.Search.objects.filter(user_id=id).values("searchtitle")
+    hot_search=models.Hot_search.objects.all().values("Hot_searchtitle")
+    mysearch = []
+    hotsearch=[]
+    mysearch_cate = []
+    mysearch_num = []
+    hotsearch_cate=[]
+    hotsearch_num=[]
+    for x in  search_title:
+        seg_list = jieba.analyse.extract_tags(x['searchtitle'], topK=20)
+        if len(seg_list) > 1:
+            for x in seg_list:
+                mysearch.append(x.lower())
+    for x in hot_search:
+        hot_list=jieba.analyse.extract_tags(x["Hot_searchtitle"],topK=20)
+        if len(hot_list)>1:
+            for hot  in hot_list:
+                hotsearch.append(hot.lower())
+    my_search=Counter(mysearch)
+    hot_search=Counter(hotsearch)
+    for x  in my_search.most_common(10):
+         mysearch_cate.append(x[0].lower())
+         mysearch_num.append(x[1])
+    for x  in hot_search.most_common(10):
+        hotsearch_cate.append(x[0].lower())
+        hotsearch_num.append(x[1])
 
+    return render(requests,"Personal/dataAnalysis.html",{"head_imgpath":"../"+head_imgpath,"mysearch_cate":mysearch_cate,
+                                                         "mysearch_num":mysearch_num,
+                                                         "hotsearch_cate":hotsearch_cate,
+                                                         "hotsearch_num":hotsearch_num
+                                                         })
+
+def collection_article(requests):
+    if requests.is_ajax():
+        id = requests.session.get('user_id')
+        collect_url=requests.POST['url']
+        collect_title=requests.POST['title']
+        #去标签
+        dr = re.compile(r'<[^>]+>', re.S)
+        collecttitle = dr.sub('', collect_title)
+        #判断收藏的是否存在于数据库
+        exist=models.Collect.objects.filter(user_id=id).values("collecturl")
+        if exist:
+            if exist[0]['collecturl']==collect_url:
+                return JsonResponse({"status":"1"})
+            else:
+                res=models.Collect.objects.create(user_id=id,collecturl=collect_url,collecttitle=collecttitle)
+                if res:
+                    return JsonResponse({"status":'0'})
+                else:
+                    return JsonResponse({"status":"1"})
 

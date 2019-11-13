@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title></title>
 		<link rel="stylesheet" type="text/css" href={% static "layui/css/layui.css" %} />
-
 	</head>
 	<body class="layui-layout-body">
 		<div class="layui-layout layui-layout-admin">
@@ -37,9 +36,136 @@
 				</div>
 			</div>
 		</div>
-		<div class="layui-body" style="padding-top: 60px;background: #F5F5F5;">
-			<span>数据分析页面</span>
+		<div class="layui-body"style="padding-top: 60px;background: #F5F5F5;" >
+			<div id="container" style="height: 50%" ></div>
+            <div id="container_one" style="height: 50%"></div>
+
 		</div>
 		<script src={% static "layui/layui.js" %}></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+        <script type="text/javascript">
+            var mysearch_cate={{ mysearch_cate|safe}}
+            var mysearch_num={{ mysearch_num|safe}}
+            var hotsearch_cate={{ hotsearch_cate|safe}}
+            var hotsearch_num={{ hotsearch_num|safe}}
+            console.log(mysearch_cate)
+            var dom = document.getElementById("container");
+             var dom_one = document.getElementById("container_one");
+             var myChart = echarts.init(dom);
+             var myChart_one = echarts.init(dom_one);
+             var app = {};
+                option = null;
+                app.title = '正负条形图';
+
+              option = {
+                  title:{
+                      text:"我的搜索",
+
+                    padding:[10,0,1000,500]
+                  },
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    data:mysearch_cate
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                xAxis : [
+                    {
+                        type : 'category',
+                        axisTick : {show: false},
+                        data : mysearch_cate
+                    }
+                ],
+                series : [
+                    {
+                        name:'次数',
+                        type:'bar',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'inside'
+                            }
+                        },
+                        data:mysearch_num
+                    },
+
+
+                ]
+            };
+             option_one = {
+                 title:{
+                     text:"热门搜索" ,
+                    padding:[10,0,1000,500]
+                 },
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    data:hotsearch_cate
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                xAxis : [
+                    {
+                        type : 'category',
+                        axisTick : {show: false},
+                        data : hotsearch_cate
+                    }
+                ],
+                series : [
+                    {
+                        name:'次数',
+                        type:'bar',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'inside'
+                            }
+                        },
+                        data:hotsearch_num
+                    },
+
+
+                ]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+             if (option_one && typeof option === "object") {
+                myChart_one.setOption(option_one, true);
+            }
+       </script>
 	</body>
 </html>

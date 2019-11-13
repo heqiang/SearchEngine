@@ -3,7 +3,10 @@ import re
 import datetime
 import pymysql
 import jieba
+import jieba.analyse
 from elasticsearch import Elasticsearch
+from collections import Counter
+import pandas as pd
 # firsttime=time.strftime("%Y-%m-%d", time.localtime())
 # lasttime=time.strftime("%H:%M:%S", time.localtime())
 # new_firsttime=firsttime.split("-")
@@ -43,12 +46,21 @@ conn=pymysql.connect(
     charset="utf8"
 )
 cur=conn.cursor()
-select_sql="select searchtitle from  user_search where user_id=11"
-cur.execute(select_sql)
-for x in cur.fetchall():
-    print(x[0])
-    seg_list=jieba.cut_for_search(x[0])
-    for i in seg_list:
-        print(i)
-conn.close()
+list_words=[]
+def get_keywords():
+    select_sql="select searchtitle from  user_search where user_id=11"
+    cur.execute(select_sql)
+    for x in cur.fetchall():
+        seg_list=jieba.analyse.extract_tags(x[0],topK=20)
+        if len(seg_list)>1:
+            for x  in seg_list:
+                list_words.append(x.lower())
 
+    conn.close()
+if __name__ == '__main__':
+    get_keywords()
+    res=Counter(list_words)
+
+    for x in res.most_common(10):
+        print(x[0])
+        print(x[1])
