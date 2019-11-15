@@ -148,7 +148,7 @@
 							<li class="layui-nav-item layui-this"><a href="/personDate/">个人资料</a></li>
 							<li class="layui-nav-item"><a href="/collection/">我的收藏</a></li>
 							<li class="layui-nav-item"><a href="/searchHistory/">我的搜索记录</a></li>
-							<li class="layui-nav-item"><a href="/dataAnalysis/">我的数据分析</a></li>
+							<li class="layui-nav-item"><a href="/dataAnalysis/">数据分析</a></li>
 						</ul>
 					</div>
 				</div>
@@ -178,10 +178,10 @@
 								<div class="person_data">
 									<ul>
 										<li><span>收藏：</span>
-											<div class="person_data_info">10</div>
+											<div class="person_data_info">{{ collect_count }}条</div>
 										</li>
 										<li><span>浏览：</span>
-											<div class="person_data_info">11</div>
+											<div class="person_data_info">{{ Search_count}}条</div>
 										</li>
 										<li><span>昵称：</span>
 											<div class="person_data_info">{{ request.session.user_name }}</div>
@@ -190,6 +190,9 @@
 										</li>
 										<li><span>邮箱：</span>
 											<div class="person_data_info">{{ request.session.email }}</div>
+										</li>
+                                        <li><span>工作：</span>
+											<div class="person_data_info">{{ request.session.job }}</div>
 										</li>
 										<li><span>简介：</span>
 											<div class="person_data_desc">{{ request.session.des }}</div>
@@ -232,13 +235,19 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">昵称:</label>
 					<div class="layui-input-block">
-						<input class="layui-input" type="text" name="name" lay-verify="required" placeholder="昵称" autocomplete="off">
+						<input class="layui-input" type="text" name="name" placeholder="昵称" autocomplete="off">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">邮箱:</label>
 					<div class="layui-input-block">
 						<input class="layui-input" type="email" name="email" lay-verify="email|required" placeholder="邮箱" autocomplete="off">
+					</div>
+				</div>
+                <div class="layui-form-item">
+					<label class="layui-form-label">工作:</label>
+					<div class="layui-input-block">
+						<input class="layui-input" type="text" name="job" lay-verify="required" placeholder="工作" autocomplete="off">
 					</div>
 				</div>
 				<div class="layui-form-item">

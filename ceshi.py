@@ -60,7 +60,7 @@ def get_keywords():
 if __name__ == '__main__':
     get_keywords()
     res=Counter(list_words)
-
-    for x in res.most_common(10):
-        print(x[0])
-        print(x[1])
+    # for x in res.most_common(10):
+    #     print(x)
+    z=res.most_common(1)
+    print(z[0][0])

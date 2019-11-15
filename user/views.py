@@ -7,6 +7,16 @@ from django.http import JsonResponse
 import jieba.analyse
 from collections import Counter
 import re
+import pymysql
+import redis
+from elasticsearch import Elasticsearch
+from datetime import datetime
+
+db = pymysql.connect("localhost","root","1422127065","bishe" ,charset="utf8" )
+cursor = db.cursor()
+client=Elasticsearch(hosts=["127.0.0.1"])
+redis_cli=redis.StrictRedis()
+
 #登录逻辑
 def login(requests):
     if requests.session.get('is_login', None):  # 不允许重复登录
@@ -32,7 +42,8 @@ def login(requests):
                 requests.session['sex']=user.sex
                 requests.session['email']=user.email
                 requests.session['des']=user.description
-                return  redirect('/index/')
+                requests.session['job'] = user.job
+                redirect("/index/")
             else:
                 message='密码错误'
                 return render(requests,'login/login.html',locals())
@@ -86,8 +97,8 @@ def register(request):
 #注销 清楚sesion
 def logout(requests):
     #清除session  若是没有登录就直接跳转到登录页面,若是登录了在跳转到登出则跳转至文章页面
-    if not requests.session.get('is_login', None):
-        return redirect('/index/')
+    # if not requests.session.get('is_login', None):
+    #     return redirect('/index/')
     requests.session.flush()
     return redirect("/index/")
 
@@ -98,18 +109,19 @@ def change(requests):
         username=requests.POST['name']
         email=requests.POST['email']
         des = requests.POST['desc']
+        job=requests.POST['job']
         user=models.User.objects.filter(username=username)
         if user:
-            message="User name is nor valid"
+            message="用户名重复"
             return JsonResponse({"message":message})
         else:
             get_email=models.User.objects.filter(email=email)
             if get_email:
-                message="email is nor valid"
+                message="邮箱重复"
                 return JsonResponse({"message":message})
             else:
                 message="ok"
-                models.User.objects.filter(id=user_id).update(username=username,email=email,description=des)
+                models.User.objects.filter(id=user_id).update(username=username,email=email,description=des,job=job)
                 requests.session['user_name'] = username
                 requests.session['email'] = email
                 requests.session['des'] = des
@@ -151,17 +163,24 @@ def  upload(requests):
         models.User.objects.filter(username=username).update(headimg=head_imgpath)
     return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
 
+
+
 #路由控制
 def personData(requests):
     if requests.session.get('is_login', None):
         id = requests.session.get('user_id')
+        collect_count=models.Collect.objects.filter(user_id=id).count()
+        Search_count = models.Search.objects.filter(user_id=id).count()
+
         head_imgpath=models.User.objects.filter(id=id).values("headimg")[0]['headimg']
-        return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath})
+        return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath,
+                                                           "collect_count":collect_count,
+                                                           "Search_count":Search_count
+                                                           })
     else:
         return redirect("/login/")
 
 def collection(requests):
-
     id = requests.session.get('user_id')
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
     return render(requests,"Personal/collection.html",{"head_imgpath":"../"+head_imgpath})
@@ -174,35 +193,45 @@ def dataAnalysis(requests):
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
     search_title=models.Search.objects.filter(user_id=id).values("searchtitle")
     hot_search=models.Hot_search.objects.all().values("Hot_searchtitle")
+
+    #将关键词提取并放入对应的list
     mysearch = []
     hotsearch=[]
-    mysearch_cate = []
-    mysearch_num = []
-    hotsearch_cate=[]
-    hotsearch_num=[]
     for x in  search_title:
         seg_list = jieba.analyse.extract_tags(x['searchtitle'], topK=20)
-        if len(seg_list) > 1:
+        if len(seg_list) >=1:
             for x in seg_list:
                 mysearch.append(x.lower())
     for x in hot_search:
         hot_list=jieba.analyse.extract_tags(x["Hot_searchtitle"],topK=20)
-        if len(hot_list)>1:
+        if len(hot_list)>=1:
             for hot  in hot_list:
                 hotsearch.append(hot.lower())
     my_search=Counter(mysearch)
     hot_search=Counter(hotsearch)
+
+    #将统计的关键词及数量分别写入
+    mysearch_cate = []
+    mysearch_num = []
+    hotsearch_cate = []
+    hotsearch_num = []
+
     for x  in my_search.most_common(10):
          mysearch_cate.append(x[0].lower())
          mysearch_num.append(x[1])
     for x  in hot_search.most_common(10):
+
         hotsearch_cate.append(x[0].lower())
         hotsearch_num.append(x[1])
+    mysearch= my_search.most_common(1)[0][0]
+    hot_reaearch=hot_search.most_common(1)[0][0]
 
     return render(requests,"Personal/dataAnalysis.html",{"head_imgpath":"../"+head_imgpath,"mysearch_cate":mysearch_cate,
                                                          "mysearch_num":mysearch_num,
                                                          "hotsearch_cate":hotsearch_cate,
-                                                         "hotsearch_num":hotsearch_num
+                                                         "hotsearch_num":hotsearch_num,
+                                                         "mysearch":mysearch,
+                                                         "hot_reaearch":hot_reaearch
                                                          })
 
 def collection_article(requests):

@@ -33,3 +33,7 @@ class  Hot_search(models.Model):
     Hot_searchtitle = models.CharField(max_length=255)
     Hot_searchurl = models.CharField(max_length=128, blank=True, default="null")
     Hot_searchtime = models.DateTimeField(auto_now_add=True)
+class ProxyIp(models.Model):
+     ip=models.CharField(max_length=125)
+     port=models.CharField(max_length=125)
+     category=models.CharField(max_length=125)
