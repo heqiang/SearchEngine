@@ -15,11 +15,11 @@ header={
 }
 z=datetime.datetime.now().strftime('%Y-%m-%d')
 new_z=z.split('-')
-class SegmentfaultSpider(RedisCrawlSpider):
+class SegmentfaultSpider(scrapy.Spider):
     name = 'segmentfault'
     allowed_domains = ['segmentfault.com']
-    # start_urls = ['https://segmentfault.com/blogs/newest?page=3200']
-    redis_key = "segmentfault.spider:start_urls"
+    start_urls = ['https://segmentfault.com/blogs/newest?page=3200']
+    # redis_key = "segmentfault.spider:start_urls"
 
     def parse(self, response):
          link_urls=response.xpath("//h2[@class='title blog-type-common blog-type-1']/a/@href").extract()

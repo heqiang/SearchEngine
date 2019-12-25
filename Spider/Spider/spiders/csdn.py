@@ -30,7 +30,6 @@ class CsdnSpider(scrapy.Spider):
         item = csdnitem()
         if response.text:
             datas=json.loads(response.text)['articles']
-
             for data in datas:
                 item["link_url"] = data['url']
                 item['title'] =data['title']

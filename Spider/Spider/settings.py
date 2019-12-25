@@ -30,21 +30,28 @@ DOWNLOADER_MIDDLEWARES = {
 
 
 ITEM_PIPELINES = {
-    # 'scrapy_redis.pipelines.RedisPipeline': 2,
+    'scrapy_redis.pipelines.RedisPipeline': 2,
     'Spider.pipelines.ElasticsearchPipeline': 4
 }
 
 #布隆过滤
-# SCHEDULER = "scrapy_redis_bloomfilter.scheduler.Scheduler"
-# DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
-# REDIS_URL = 'redis://localhost:6379/0'
-# BLOOMFILTER_HASH_NUMBER = 6
-# BLOOMFILTER_BIT = 30
-# SCHEDULER_PERSIST = True
+SCHEDULER = "scrapy_redis_bloomfilter.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
+REDIS_URL = 'redis://localhost:6379/1'
+BLOOMFILTER_HASH_NUMBER = 6
+BLOOMFILTER_BIT = 30
+SCHEDULER_PERSIST = True
+
+
+
+#scrapy-redis
+
+
 # REDIS_HOST = "localhost"
 # # # 指定数据库的端口号
 # REDIS_PORT = 6379
-#使用scrapy-redis的去重组件，不使用scrapy默认的去重
+#
+# #使用scrapy-redis的去重组件，不使用scrapy默认的去重
 # DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 # #使用scrapy-redis的调度组件，不使用scrapy的默认调度器
 # SCHEDULER = "scrapy_redis.scheduler.Scheduler"
@@ -53,4 +60,3 @@ ITEM_PIPELINES = {
 # #允许暂停，redis请求记录不丢失
 # SCHEDULER_PERSIST = True
 
-#

@@ -5,14 +5,14 @@ import  re
 from ..utils.common import get_md5
 from scrapy_redis.spiders import RedisCrawlSpider
 
-class BoKeYuanSpider(RedisCrawlSpider):
+class BoKeYuanSpider(scrapy.Spider):
     name = 'bo_ke_yuan'
     allowed_domains = ['cnblogs.com']
-    redis_key = "bo_ke_yuan.spider:start_urls"
-    # def start_requests(self):
-    #     list = ['https://www.cnblogs.com/', 'https://www.cnblogs.com/pick/', 'https://www.cnblogs.com/candidate/']
-    #     for url in list:
-    #         yield scrapy.Request(url=url, callback=self.parse)
+    # redis_key = "bo_ke_yuan.spider:start_urls"
+    def start_requests(self):
+        list = ['https://www.cnblogs.com/', 'https://www.cnblogs.com/pick/', 'https://www.cnblogs.com/candidate/']
+        for url in list:
+            yield scrapy.Request(url=url, callback=self.parse)
     #列表解析
     def parse(self, response):
         for url  in response.xpath('//div[@id="post_list"]/div'):

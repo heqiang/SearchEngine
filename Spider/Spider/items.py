@@ -396,7 +396,7 @@ class yixieshiItem(scrapy.Item):
          Tec_article.save()
          redis_cli.incr("yixieshi")
          return
-class codectoItem(scrapy.Field):
+class Aliyun_tec(scrapy.Field):
     title=scrapy.Field()
     tags=scrapy.Field()
     time=scrapy.Field()
@@ -404,3 +404,17 @@ class codectoItem(scrapy.Field):
     link_url=scrapy.Field()
     url_object_id = scrapy.Field()
     source = scrapy.Field()
+
+    def save_artic_to_es(self):
+        Tec_article = TechnologyType()
+        Tec_article.title = self['title']
+        Tec_article.time = self['time']
+        Tec_article.content = remove_tags(self['content'])
+        Tec_article.link_url = self['link_url']
+        Tec_article.meta.id = self['url_object_id']
+        Tec_article.source = self['source']
+        Tec_article.tag = self['tags']
+        Tec_article.suggest = gen_suggest(Tec_article._doc_type.index, ((Tec_article.title, 10), (Tec_article.tag, 7)))
+        Tec_article.save()
+        redis_cli.incr("aliyun")
+        return
