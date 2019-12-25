@@ -418,3 +418,11 @@ class Aliyun_tec(scrapy.Field):
         Tec_article.save()
         redis_cli.incr("aliyun")
         return
+class WannnegSqlItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    title=scrapy.Field()
+    comment = scrapy.Field()
+    link = scrapy.Field()
+    quote = scrapy.Field()
+    rank = scrapy.Field()

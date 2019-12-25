@@ -4,11 +4,11 @@
     <list default="true" id="ad707256-8dcb-4744-b2cd-02d6e2337e19" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Spider/Spider/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spider/Spider/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/middlewares.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Spider/Spider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Spider/spiders/51cto.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/spiders/51cto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Spider/spiders/bo_ke_yuan.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/spiders/bo_ke_yuan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Spider/spiders/csdn.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/spiders/csdn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spider/Spider/tools/getip.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider/tools/getip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spider/Spider/utils/get_proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spider/Spider/utils/header.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,6 +23,7 @@
     <SUITE FILE_PATH="coverage/BS_Search$qiyundaili.coverage" NAME="qiyundaili Coverage Results" MODIFIED="1572843301170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/tools" />
     <SUITE FILE_PATH="coverage/BS_Search$redis_conn.coverage" NAME="redis_conn Coverage Results" MODIFIED="1573464394727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BS_Search$get_proxy__1_.coverage" NAME="get_proxy (1) Coverage Results" MODIFIED="1572597988633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/Proxy" />
+    <SUITE FILE_PATH="coverage/BS_Search$getip.coverage" NAME="getip Coverage Results" MODIFIED="1577266097715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Spider/Spider/tools" />
     <SUITE FILE_PATH="coverage/BS_Search$scratch_1.coverage" NAME="scratch_1 Coverage Results" MODIFIED="1573137147231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="G:/1422127065/FileRecv" />
     <SUITE FILE_PATH="coverage/BS_Search$ceshi__1_.coverage" NAME="ceshi (1) Coverage Results" MODIFIED="1571649934650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BS_Search$cehi1.coverage" NAME="cehi1 Coverage Results" MODIFIED="1573549947619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -62,68 +63,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Aliyun_Tec.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/Aliyun_Tec.py">
+      <file leaf-file-name="getip.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Spider/Spider/tools/getip.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="17" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="526">
+              <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="csdn.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/csdn.py">
+      <file leaf-file-name="douban.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/douban.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oschina.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/oschina.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="segmentfault.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bo_ke_yuan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/bo_ke_yuan.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="51cto.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/51cto.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+            <state relative-caret-position="369">
+              <caret line="27" column="57" lean-forward="true" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -188,13 +141,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Spider/CESHI.py" />
         <option value="$PROJECT_DIR$/Spider/ceshi.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/Proxy/getproxy/xicidaili.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/uamid.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/Proxy/get_proxy.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/Tools/xicidaili.py" />
-        <option value="$PROJECT_DIR$/Spider/Spider/tools/getip.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/tools/datebase.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/tools/conn_datebase.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/tools/qiyundaili.py" />
@@ -219,7 +170,6 @@
         <option value="$PROJECT_DIR$/templates/Personal/searchHistory.html" />
         <option value="$PROJECT_DIR$/templates/Personal/collection.html" />
         <option value="$PROJECT_DIR$/ceshi.py" />
-        <option value="$PROJECT_DIR$/Spider/Spider/middlewares.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/codercto.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/requests.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/detail.py" />
@@ -233,12 +183,15 @@
         <option value="$PROJECT_DIR$/user/views.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/csdn.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/answer.py" />
-        <option value="$PROJECT_DIR$/Spider/Spider/items.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/Aliyun_Tec.py" />
-        <option value="$PROJECT_DIR$/Spider/Spider/settings.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/bo_ke_yuan.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/51cto.py" />
         <option value="$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py" />
+        <option value="$PROJECT_DIR$/Spider/Spider/spiders/douban.py" />
+        <option value="$PROJECT_DIR$/Spider/Spider/items.py" />
+        <option value="$PROJECT_DIR$/Spider/Spider/middlewares.py" />
+        <option value="$PROJECT_DIR$/Spider/Spider/settings.py" />
+        <option value="$PROJECT_DIR$/Spider/Spider/tools/getip.py" />
       </list>
     </option>
   </component>
@@ -248,11 +201,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-32" />
-    <option name="y" value="1" />
-    <option name="width" value="1928" />
-    <option name="height" value="1032" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-338" />
+    <option name="y" value="46" />
+    <option name="width" value="1983" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -288,6 +241,20 @@
               <item name="Spider" type="462c0819:PsiDirectoryNode" />
               <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="Spider" type="462c0819:PsiDirectoryNode" />
+              <item name="Spider" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BS_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BS_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="Spider" type="462c0819:PsiDirectoryNode" />
+              <item name="Spider" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -298,7 +265,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Scrapy/wannneg_sql" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -331,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.detail">
+  <component name="RunManager" selected="Python.getip">
     <configuration name="cehi1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BS_Search" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -370,25 +337,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="ceshi1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="BS_Search" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ceshi1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="detail" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BS_Search" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -403,6 +351,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Spider/Spider/detail.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="getip" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BS_Search" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Spider/Spider/tools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Spider/Spider/tools/getip.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -453,18 +420,18 @@
     <list>
       <item itemvalue="Django server.BS_Search" />
       <item itemvalue="Python.ceshi" />
-      <item itemvalue="Python.ceshi1" />
       <item itemvalue="Python.redis_conn" />
       <item itemvalue="Python.cehi1" />
       <item itemvalue="Python.detail" />
+      <item itemvalue="Python.getip" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.getip" />
         <item itemvalue="Python.detail" />
         <item itemvalue="Python.ceshi" />
         <item itemvalue="Python.cehi1" />
         <item itemvalue="Python.redis_conn" />
-        <item itemvalue="Python.ceshi1" />
       </list>
     </recent_temporary>
   </component>
@@ -482,7 +449,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-29" y="0" width="1542" height="825" extended-state="0" />
+    <frame x="-270" y="37" width="1586" height="832" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -490,9 +457,9 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32930514" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.66330934" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.042168673" />
-      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.15758468" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75" visible="true" weight="0.17924528" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.75107914" />
+      <window_info anchor="bottom" auto_hide="true" x="282" y="236" width="769" height="328" id="Terminal" order="12" weight="0.6057554" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75" visible="true" weight="0.16753927" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" visible="true" weight="0.0" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -543,14 +510,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Personal/avater.html" />
     <entry file="file://$PROJECT_DIR$/static/layui/css/layui.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -583,13 +542,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/utils/get_proxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -777,20 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/tools/getip.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="55" column="23" lean-forward="true" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/middlewares.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1426">
@@ -809,37 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="177" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/itpub.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/utils/common.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="407" column="31" lean-forward="true" selection-start-line="407" selection-start-column="31" selection-end-line="407" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/csdn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="29" selection-start-line="29" selection-end-line="30" />
         </state>
       </provider>
     </entry>
@@ -873,6 +780,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/oschina.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -883,10 +800,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/segmentfault.py">
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/itpub.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        <state relative-caret-position="575">
+          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/utils/get_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/utils/header.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="422" column="27" lean-forward="true" selection-start-line="422" selection-start-column="27" selection-end-line="422" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/utils/common.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#169#182#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/csdn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/tools/getip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spider/Spider/spiders/douban.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="27" column="57" lean-forward="true" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>

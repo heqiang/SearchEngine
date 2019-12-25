@@ -24,23 +24,23 @@ RETRY_TIMES = 3 #设置重试次数
 DOWNLOADER_MIDDLEWARES = {
    'Spider.middlewares.SpiderDownloaderMiddleware': None,
     'Spider.middlewares.Uamid': 300,
-    # 'Spider.middlewares.RandomProxy':10
+    'Spider.middlewares.RandomProxy':10
 
 }
 
 
 ITEM_PIPELINES = {
-    'scrapy_redis.pipelines.RedisPipeline': 2,
-    'Spider.pipelines.ElasticsearchPipeline': 4
+    # 'scrapy_redis.pipelines.RedisPipeline': 2,
+    # 'Spider.pipelines.ElasticsearchPipeline': 4
 }
 
 #布隆过滤
-SCHEDULER = "scrapy_redis_bloomfilter.scheduler.Scheduler"
-DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
-REDIS_URL = 'redis://localhost:6379/1'
-BLOOMFILTER_HASH_NUMBER = 6
-BLOOMFILTER_BIT = 30
-SCHEDULER_PERSIST = True
+# SCHEDULER = "scrapy_redis_bloomfilter.scheduler.Scheduler"
+# DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
+# REDIS_URL = 'redis://localhost:6379/1'
+# BLOOMFILTER_HASH_NUMBER = 6
+# BLOOMFILTER_BIT = 30
+# SCHEDULER_PERSIST = True
 
 
 

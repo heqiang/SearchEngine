@@ -21,7 +21,7 @@ ua=UserAgent()
 class GetIp(object):
     # 无效ip删除
     def delete(self, ip):
-        delete_sql = 'delete  from proxy_ip where ip={0}'.format(ip)
+        delete_sql = 'delete  from proxy_ip where ip="{0}"'.format(ip)
         cursor.execute(delete_sql)
         conn.commit()
         return True
@@ -32,16 +32,18 @@ class GetIp(object):
         proxy_url = "{0}://{1}:{2}".format(category, ip, port)
         try:
             proxy_dict = {
-                "http": proxy_url
+                "http": proxy_url,
+                "https":proxy_url
             }
-            res = requests.get(http_url, proxies=proxy_dict)
+            res = requests.get(http_url, proxies=proxy_dict,timeout=3)
         except Exception as e:
-            self.delete_ip(ip)
+            self.delete(ip)
             return False
         else:
             code = res.status_code
-            if code >= 200 and code < 300:
+            if code==200:
                 print("可用ip")
+                print(res.content)
                 return True
             else:
                 print("不可用ip")
@@ -52,15 +54,15 @@ class GetIp(object):
         ranodm_sql = 'select ip,port,category FROM  proxy_ip ORDER BY RAND() LIMIT 1'
         result = cursor.execute(ranodm_sql)
         for res in cursor.fetchall():
-            print(res)
             ip = res[0]
             port = res[1]
             category = res[2]
+            #代理判断是否有效
             jundge = self.jundge_ip(ip, port, category)
             if jundge:
-                return "{0}://{1}:{2}".format(category, ip, port)
+                proxy="{0}://{1}:{2}".format(category, ip, port)
+                return  proxy
             else:
                 return self.get_random_ip()
 if __name__ == '__main__':
-    res=GetIp().get_random_ip()
-    print(res)
+    GetIp().get_random_ip()

@@ -7,7 +7,6 @@
 
 import random
 import time
-from .utils.get_proxy import get_proxy
 from .tools.getip import GetIp
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
 from  fake_useragent import UserAgent
