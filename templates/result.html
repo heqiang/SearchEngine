@@ -39,7 +39,7 @@
     <div class="nav">
     	<ul class="searchList">
             <li class="searchItem current" data-type="article">文章</li>
-{#            <li class="searchItem" data-type="question">问答</li>#}
+            <li class="searchItem" data-type="answer">问答</li>
 {#            <li class="searchItem" data-type="job">职位</li>#}
             {% if request.session.is_login %}
                   <li class="searchItem  login" ><a href="#">当前在线：{{ request.session.user_name }}</a></li>
@@ -290,6 +290,7 @@
                 dataType:'json',
                 url:suggest_url+"?s="+searchText+"&s_type="+$(".searchItem.current").attr('data-type'),
                 async: true,
+
                 success: function(data) {
                     for (var i=0;i<data.length;i++){
                         console.log(data[i])

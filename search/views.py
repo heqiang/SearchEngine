@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse
 from  django.http import JsonResponse
 from django.shortcuts import  redirect
-from search.models import ArticType,TechnologyType
+from search.models import TechnologyType,AnswerType
 import json
 from elasticsearch import Elasticsearch
 from datetime import datetime
@@ -24,6 +24,7 @@ def  IndexView(request):
 
 #跳转搜索结果页面时 如果登录了 就以登录者搜索的最新一条为搜索返回内容，否则以热搜的最新一条返回搜索结果
 def Result(requests):
+    #mysql  用户操作组
     if requests.session.get('is_login', None):
         user_id = requests.session.get('user_id')
         res=models.Search.objects.filter(user_id=user_id).values("searchtitle","searchtime").order_by("-searchtime")
@@ -37,10 +38,12 @@ def Result(requests):
     redis_cli.zincrby("search_keywords_set", 1, key_words)
     topn_search = redis_cli.zrevrangebyscore("search_keywords_set", "+inf", "-inf", start=0, num=5)
 
-    # 热门搜索
+    # 热门搜索  redis数据库组
     new_topn_search = []
     for x in topn_search:
         new_topn_search.append(x.decode(encoding='utf-8'))
+
+    es_category = requests.GET.get('s_type', '')
     page = requests.GET.get("p", "2")
     try:
         page = int(page)
@@ -48,7 +51,7 @@ def Result(requests):
         page = 1
     start_time = datetime.now()
     response = client.search(
-        index="technology",
+        index="{0}".format(es_category),
         body={
             "query": {
                 "multi_match": {
@@ -107,23 +110,41 @@ def Result(requests):
 
 
 def SearchSuggest(request):  # 搜索自动补全逻辑处理
-    key_words = request.GET.get('s', '') # 获取到请求词
-    re_datas = []
-    if key_words:
-        s = TechnologyType.search()
-        s = s.suggest('my_suggest', key_words, completion={
-            "field": "suggest", "fuzzy": {
-                "fuzziness": 2
-            },
-            "size": 10
-        })
-        suggestions = s.execute_suggest()
-        for match in suggestions.my_suggest[0].options:
-            source = match._source
-            re_datas.append(source["title"])
+    es_category=request.GET.get('s_type','')
+    if es_category=="question":
+        key_words = request.GET.get('s', '')  # 获取到请求词
+        re_datas = []
+        if key_words:
+            s = AnswerType.search()
+            s = s.suggest('my_suggest', key_words, completion={
+                "field": "suggest", "fuzzy": {
+                    "fuzziness": 2
+                },
+                "size": 10
+            })
+            suggestions = s.execute_suggest()
+            for match in suggestions.my_suggest[0].options:
+                source = match._source
+                re_datas.append(source["title"])
+    else:
+        key_words = request.GET.get('s', '') # 获取到请求词
+        re_datas = []
+        if key_words:
+            s = TechnologyType.search()
+            s = s.suggest('my_suggest', key_words, completion={
+                "field": "suggest", "fuzzy": {
+                    "fuzziness": 2
+                },
+                "size": 10
+            })
+            suggestions = s.execute_suggest()
+            for match in suggestions.my_suggest[0].options:
+                source = match._source
+                re_datas.append(source["title"])
     return HttpResponse(json.dumps(re_datas), content_type="application/json")
 
 def SearchView(request):
+        es_category = request.GET.get('s_type', '')
         key_words=request.GET.get('q',"")
         if request.session.get('is_login',None):
             user_id=request.session.get('user_id')
@@ -143,7 +164,7 @@ def SearchView(request):
             page = 1
         start_time=datetime.now()
         response=client.search(
-            index="technology",
+            index="{0}".format(es_category),
             body={
                 "query": {
                   "multi_match": {

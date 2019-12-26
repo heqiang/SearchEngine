@@ -63,8 +63,26 @@ class TechnologyType(DocType):
         doc_type = "tec_articles"
 
 
+class AnswerType(DocType):
+    suggest = Completion(analyzer=ik_analyzer)
+    title = Text(analyzer='ik_max_word')
+    time = Date()
+    link_url = Keyword()
+    content = Text(analyzer='ik_max_word')
+    url_object_id = Keyword()
+    tag = Text(analyzer='ik_max_word')  # 标签
+    comment_num = Integer()  # 评论数
+    read_num = Integer()  # 阅读数
+    Collection_num = Integer()  # 收藏数
+    praise_num = Integer()  # 点赞数
+    source = Keyword()  # 来源
+
+    class Meta:
+        index = "answer"  # 必须小写
+        doc_type = "tec_answer"
+
 if __name__ == '__main__':
-    TechnologyType.init()
+    AnswerType.init()
 
 from django.db import models
 

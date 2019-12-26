@@ -47,13 +47,14 @@ class GetIp(object):
                 return True
             else:
                 print("不可用ip")
-                self.delete_ip(ip)
+                self.delete(ip)
 
     def get_random_ip(self):
         # 随机获取一个ip
         ranodm_sql = 'select ip,port,category FROM  proxy_ip ORDER BY RAND() LIMIT 1'
         result = cursor.execute(ranodm_sql)
         for res in cursor.fetchall():
+
             ip = res[0]
             port = res[1]
             category = res[2]

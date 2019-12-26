@@ -11,6 +11,7 @@ import datetime
 # from ..Spider.models.es_article_types import ArticType
 from .models.es_article_types import ArticType
 from .models.Technology_types import TechnologyType
+from .models.Answer_type import AnswerType
 from w3lib.html import remove_tags
 from elasticsearch_dsl.connections import connections
 import redis
@@ -103,75 +104,7 @@ def change_time(value):
 def md5(value):
     print(value)
     return  get_md5(value)
-# class SearchEngineItem(scrapy.Item):
-#     # define the fields for your item here like:
-#     # name = scrapy.Field()
-#     title = scrapy.Field(
-#         output_processor=TakeFirst()
-#     )
-#     create_date = scrapy.Field(
-#         input_processor=MapCompose(item_create_date),
-#         output_processor=TakeFirst()
-#     )
-#     link_url = scrapy.Field(
-#         output_processor=TakeFirst()
-#     )
-#     url_object_id = scrapy.Field(
-#         output_processor=TakeFirst()
-#     )
-#     # front_image_url = scrapy.Field(
-#     #
-#     # )
-#     # front_image_path = scrapy.Field(
-#     #     output_processor=TakeFirst()
-#     # )
-#     # 点赞数
-#     praise_num = scrapy.Field(
-#         input_processor=MapCompose(get_praise_num),
-#         output_processor=TakeFirst()
-#     )
-#     # 评论数
-#     comment_num = scrapy.Field(
-#         input_processor=MapCompose(get_num),
-#         output_processor=TakeFirst()
-#     )
-#     # 收藏数
-#     fav_num = scrapy.Field(
-#         input_processor=MapCompose(get_num),
-#         output_processor=TakeFirst()
-#     )
-#     # 标签
-#     tags = scrapy.Field(
-#         input_processor=MapCompose(remove_comment),
-#         output_processor=Join(',')
-#     )
-#     content = scrapy.Field(
-#         input_processor=Join(','),
-#         output_processor=TakeFirst()
-#     )  # 内容
-#     def save_artic_to_es(self):
-#         article = ArticType()
-#         article.title = self['title']
-#         article.create_date = self['create_date']
-#         article.content = remove_tags(self['content'])
-#         # article.front_image_url = self['front_image_url']
-#         # if "front_image_path" in self:
-#         #     article.front_image_path = self['front_image_path']
-#         # article.front_image_path = self['front_image_path']
-#         try:
-#             article.praise_num= self['praise_num']
-#         except:
-#             article.praise_num=0
-#         article.fav_num = self['fav_num']
-#         article.comment_num = self['comment_num']
-#         article.link_url = self['link_url']
-#         article.tags = self['tags']
-#         article.meta.id = self['url_object_id']
-#         # 搜索建议
-#         article.suggest=gen_suggest(ArticType._doc_type.index,((article.title,10),(article.tags,7)))
-#         article.save()
-#         redis_cli.incr("jobbole_count")
-#         return
+
 class  csdnitem(scrapy.Item):
     title = scrapy.Field()
     link_url = scrapy.Field()
@@ -418,11 +351,26 @@ class Aliyun_tec(scrapy.Field):
         Tec_article.save()
         redis_cli.incr("aliyun")
         return
-class WannnegSqlItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    title=scrapy.Field()
-    comment = scrapy.Field()
-    link = scrapy.Field()
-    quote = scrapy.Field()
-    rank = scrapy.Field()
+class  iteye(scrapy.Field):
+    title = scrapy.Field()
+    tags = scrapy.Field()
+    time = scrapy.Field()
+    content = scrapy.Field()
+    link_url = scrapy.Field()
+    url_object_id = scrapy.Field()
+    source = scrapy.Field()
+
+    def save_artic_to_es(self):
+        Tec_article = AnswerType()
+        Tec_article.title = self['title']
+        Tec_article.time = self['time']
+        Tec_article.content = remove_tags(self['content'])
+        Tec_article.link_url = self['link_url']
+        Tec_article.meta.id = self['url_object_id']
+        Tec_article.source = self['source']
+        Tec_article.tag = self['tags']
+        Tec_article.suggest = gen_suggest(Tec_article._doc_type.index, ((Tec_article.title, 10), (Tec_article.tag, 7)))
+        Tec_article.save()
+        redis_cli.incr("iteye")
+        return
+
