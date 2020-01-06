@@ -8,7 +8,7 @@ from datetime import datetime
 class IteyeSpider(scrapy.Spider):
     name = 'iteye'
     allowed_domains = ['iteye.com']
-    start_urls = ['https://www.iteye.com/ask?page=42']
+    start_urls = ['https://www.iteye.com/ask?page=69']
 
     def parse(self, response):
         page=re.findall("\d+", response.url)

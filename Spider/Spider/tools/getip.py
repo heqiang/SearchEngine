@@ -42,8 +42,7 @@ class GetIp(object):
         else:
             code = res.status_code
             if code==200:
-                print("可用ip")
-                print(res.content)
+                print("可用ip:{0}://{1}:{2}".format(category, ip, port))
                 return True
             else:
                 print("不可用ip")

@@ -24,7 +24,7 @@ RETRY_TIMES = 3 #设置重试次数
 DOWNLOADER_MIDDLEWARES = {
    'Spider.middlewares.SpiderDownloaderMiddleware': None,
     'Spider.middlewares.Uamid': 300,
-    # 'Spider.middlewares.RandomProxy':10
+    'Spider.middlewares.RandomProxy':10
 
 }
 
