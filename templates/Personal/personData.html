@@ -235,25 +235,25 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">昵称:</label>
 					<div class="layui-input-block">
-						<input class="layui-input" type="text" name="name" placeholder="昵称" autocomplete="off">
+						<input class="layui-input" type="text" name="name" placeholder="{{ request.session.user_name }}" autocomplete="off" >
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">邮箱:</label>
 					<div class="layui-input-block">
-						<input class="layui-input" type="email" name="email" lay-verify="email|required" placeholder="邮箱" autocomplete="off">
+						<input class="layui-input" type="email" name="email" lay-verify="email|required" placeholder="{{ request.session.email }}" autocomplete="off">
 					</div>
 				</div>
                 <div class="layui-form-item">
 					<label class="layui-form-label">工作:</label>
 					<div class="layui-input-block">
-						<input class="layui-input" type="text" name="job" lay-verify="required" placeholder="工作" autocomplete="off">
+						<input class="layui-input" type="text" name="job" lay-verify="required" placeholder="{{ request.session.job }}" autocomplete="off">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">简介:</label>
 					<div class="layui-input-block">
-						<textarea style="width:300px;height:100px;" name="desc" lay-verify="required" placeholder="简介"></textarea>
+						<textarea style="width:300px;height:100px;" name="desc" lay-verify="required" placeholder="{{ request.session.des}}"></textarea>
 					</div>
 				</div>
 				<div class="layui-form-item">

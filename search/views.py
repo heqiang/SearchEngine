@@ -31,9 +31,9 @@ def Result(requests):
         if  res:
             key_words=res[0]['searchtitle']
     else:
-        res=models.Hot_search.objects.values("searchtitle","searchtime").order_by("-searchtime")
+        res=models.Hot_search.objects.values("Hot_searchtitle","Hot_searchtime").order_by("-Hot_searchtime")
         if res:
-            key_words=res[0]['searchtitle']
+            key_words=res[0]['Hot_searchtitle']
     models.Hot_search.objects.create(Hot_searchtitle=key_words)
     redis_cli.zincrby("search_keywords_set", 1, key_words)
     topn_search = redis_cli.zrevrangebyscore("search_keywords_set", "+inf", "-inf", start=0, num=5)
@@ -56,7 +56,7 @@ def Result(requests):
             "query": {
                 "multi_match": {
                     "query": key_words,
-                    "fields": ["title", "tags", "content"]
+                    "fields": ["title^3", "tags", "content"]
                 }
             },
             "from": (page - 1) * 10,  # 从多少条开始获取
@@ -145,7 +145,9 @@ def SearchSuggest(request):  # 搜索自动补全逻辑处理
 
 def SearchView(request):
         es_category = request.GET.get('s_type', '')
+
         key_words=request.GET.get('q',"")
+
         if request.session.get('is_login',None):
             user_id=request.session.get('user_id')
             models.Search.objects.create(searchtitle=key_words,user_id=user_id)
@@ -169,7 +171,7 @@ def SearchView(request):
                 "query": {
                   "multi_match": {
                     "query": key_words,
-                    "fields": ["title","tags","content"]
+                    "fields": ["title^3","tags","content"] #title设置 是其他符合关键词的字段的三倍
                   }
               },
                 "from": (page-1)*10, #从多少条开始获取
@@ -205,7 +207,8 @@ def SearchView(request):
                       hit_dict["content"] = "".join(hit["highlight"]["content"][:500])
                   else:
                       hit_dict["content"] = "".join(hit["_source"]["content"][:500])
-                  hit_dict["time"] = hit['_source']["time"]
+                  article_time= hit['_source']["time"]
+                  hit_dict["time"]=article_time.split("T")[0]
                   hit_dict["url"] = hit['_source']["link_url"]
                   hit_dict["score"] = hit["_score"]
                   hit_dict["source"]=hit['_source']["source"]

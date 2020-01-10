@@ -66,7 +66,7 @@
 
                     <div class="resultItem">
                             <div class="itemHead">
-                                <a href="{{ hit.url }}"  target="_blank" class="title" id="collect">{% autoescape off %}{{ hit.title }}{% endautoescape %}</a>
+                                <a href="{{ hit.url }}"  target="_blank" class="title" id="collect">{% autoescape off %}{{ hit.title }}{% endautoescape %}  -{{hit.source}}</a>
                                 <span class="divsion">-</span>
 {#                                <span class="fileType">#}
 {#                                    <span class="label">来源：</span>#}
@@ -81,18 +81,18 @@
                                 </span>
                             </div>
                             <div class="itemBody">
-                                {% autoescape off %}{{ hit.content }}{% endautoescape %}
+                                {% autoescape off %}{{hit.time}} - {{ hit.content }}{% endautoescape %}
                                  <a  href="{{ hit.url }}",target="_blank">...查看更多</a>
                             </div>
                             <div class="itemFoot">
-                                <span class="info">
-                                    <label>来源：</label>
-                                    <span class="value">{{hit.source}}</span>
-                                </span>
 {#                                <span class="info">#}
+{#                                    <label>来源：</label>#}
+{#                                    <span class="value">{{hit.source}}</span>#}
+{#                                </span>#}
+                                <span class="info">
 {#                                    <label>发布时间：</label>#}
 {#                                    <span class="value">{{hit.time}}</span>#}
-{#                                </span>#}
+                                </span>
                             </div>
                         </div>
                     {% endfor %}
@@ -160,8 +160,11 @@
            success:function (data) {
             if(data.status==='0'){
              alert("收藏成功")
+            }else if(data.status==="2"){
+                alert("你还没有登录哦，登录后才可以收藏")
+
             }else{
-             alert("已收藏")
+                alert("已收藏")
             }
            }
           });

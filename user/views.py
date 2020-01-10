@@ -94,13 +94,80 @@ def register(request):
             return render(request, 'login/register.html', locals())
     register_form = forms.RegisterForm()
     return render(request, 'login/register.html', locals())
-#注销 清楚sesion
+#注销 清除sesion
 def logout(requests):
     #清除session  若是没有登录就直接跳转到登录页面,若是登录了在跳转到登出则跳转至文章页面
     # if not requests.session.get('is_login', None):
     #     return redirect('/index/')
     requests.session.flush()
-    return redirect("/index/")
+    res = models.Hot_search.objects.values("Hot_searchtitle", "Hot_searchtime").order_by("-Hot_searchtime")
+    print(res)
+    if res:
+        key_words = res[0]['Hot_searchtitle']
+    es_category = requests.GET.get('s_type', '')
+    page = requests.GET.get("p", "2")
+    try:
+        page = int(page)
+    except:
+        page = 1
+    start_time = datetime.now()
+    response = client.search(
+        index="{0}".format(es_category),
+        body={
+            "query": {
+                "multi_match": {
+                    "query": key_words,
+                    "fields": ["title^3", "tags", "content"]
+                }
+            },
+            "from": (page - 1) * 10,  # 从多少条开始获取
+            "size": 10,  # 获取多少条数据
+            "highlight": {  # 查询关键词高亮处理
+                # 样式控制
+                "pre_tags": ['<span class="keyWord">'],  # 高亮开始标签
+                "post_tags": ['</span>'],  # 高亮结束标签
+                "fields": {  # 高亮设置
+                    "title": {},  # 高亮字段
+                    "content": {}  # 高亮字段
+                }
+            }
+        }
+    )
+    end_time = datetime.now()
+    last_seconds = (end_time - start_time).total_seconds()
+    total_nums = response["hits"]["total"]  # 返回总的条数
+    if total_nums > 10:
+        page_nums = int(total_nums / 10) + 1
+    else:
+        page_nums = int(total_nums / 10)
+    all_list = []
+    # 10条
+    for hit in response["hits"]["hits"]:
+        hit_dict = {}
+        if "highlight" in hit:
+            if "title" in hit["highlight"]:
+                hit_dict["title"] = "".join(hit["highlight"]["title"])
+            else:
+                hit_dict["title"] = ''.join(hit["_source"]["title"])
+            if "content" in hit["highlight"]:
+                hit_dict["content"] = "".join(hit["highlight"]["content"][:500])
+            else:
+                hit_dict["content"] = "".join(hit["_source"]["content"][:500])
+            hit_dict["time"] = hit['_source']["time"]
+            hit_dict["url"] = hit['_source']["link_url"]
+            hit_dict["score"] = hit["_score"]
+            hit_dict["source"] = hit['_source']["source"]
+            # 将内容加入到list
+            all_list.append(hit_dict)
+    return render(requests, "result.html", {"all_list": all_list,
+                                            "key_words": key_words,
+                                            "total_nums": total_nums,  # 数据总条数
+                                            "page": page,  # 当前页码
+                                            "page_nums": page_nums,  # 页数
+                                            "last_seconds": last_seconds,
+                                            # "topn_search": new_topn_search,
+                                            })
+
 
 #用户资料修改
 def change(requests):
@@ -140,6 +207,7 @@ def check_pwd(requests):
         else:
             return JsonResponse({"message": "密码错误"})
 
+#用户密码修改
 def change_password(requests):
         if requests.is_ajax():
             user_id = requests.session.get('user_id')
@@ -151,7 +219,7 @@ def change_password(requests):
             else:
                 return JsonResponse({"status": '1'})
 
-
+#用户头像更改
 def  upload(requests):
     if requests.method=="POST":
         username=requests.session.get('user_name')
@@ -235,22 +303,25 @@ def dataAnalysis(requests):
                                                          })
 
 def collection_article(requests):
-    if requests.is_ajax():
-        id = requests.session.get('user_id')
-        collect_url=requests.POST['url']
-        collect_title=requests.POST['title']
-        #去标签
-        dr = re.compile(r'<[^>]+>', re.S)
-        collecttitle = dr.sub('', collect_title)
-        #判断收藏的是否存在于数据库
-        exist=models.Collect.objects.filter(user_id=id).values("collecturl")
-        if exist:
-            if exist[0]['collecturl']==collect_url:
-                return JsonResponse({"status":"1"})
-            else:
-                res=models.Collect.objects.create(user_id=id,collecturl=collect_url,collecttitle=collecttitle)
-                if res:
-                    return JsonResponse({"status":'0'})
-                else:
+    if requests.session.get('is_login', None):
+        if requests.is_ajax():
+            id = requests.session.get('user_id')
+            collect_url=requests.POST['url']
+            collect_title=requests.POST['title']
+            #去标签
+            dr = re.compile(r'<[^>]+>', re.S)
+            collecttitle = dr.sub('', collect_title)
+            #判断收藏的是否存在于数据库
+            exist=models.Collect.objects.filter(user_id=id).values("collecturl")
+            if exist:
+                if exist[0]['collecturl']==collect_url:
                     return JsonResponse({"status":"1"})
+                else:
+                    res=models.Collect.objects.create(user_id=id,collecturl=collect_url,collecttitle=collecttitle)
+                    if res:
+                        return JsonResponse({"status":'0'})
+                    else:
+                        return JsonResponse({"status":"1"})
+    else:
+        return JsonResponse({"status": '2'})
 
