@@ -17,7 +17,7 @@ class RegisterForm(forms.Form):
     password1 = forms.CharField(label="密码", max_length=256,widget=forms.PasswordInput(
                                    attrs={'class': 'form-control', 'placeholder': "Password"}))
     password2 = forms.CharField(label="请再次输入密码", max_length=256, widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'placeholder': "Password"}))
+        attrs={'class': 'form-control', 'placeholder': "Password again"}))
     email=forms.EmailField(label="邮箱地址",max_length=256, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': "email"}))
     sex = forms.ChoiceField(label='性别',choices=gender)

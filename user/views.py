@@ -3,7 +3,7 @@ from django.shortcuts import  redirect
 from user import  models
 from user import forms
 import hashlib
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 import jieba.analyse
 from collections import Counter
 import re
@@ -11,11 +11,28 @@ import pymysql
 import redis
 from elasticsearch import Elasticsearch
 from datetime import datetime
+import io
+from backend import check_code as CheckCode
 
 db = pymysql.connect("localhost","root","1422127065","bishe" ,charset="utf8" )
 cursor = db.cursor()
 client=Elasticsearch(hosts=["127.0.0.1"])
 redis_cli=redis.StrictRedis()
+
+#验证码
+def check_code(request):
+    stream = io.BytesIO()
+    # img图片对象,code在图像中写的内容
+    img, code = CheckCode.create_validate_code()
+    img.save(stream, "png")
+    # 图片页面中显示,立即把session中的CheckCode更改为目前的随机字符串值
+    request.session["CheckCode"] = code
+    print("进入验证码")
+    return HttpResponse(stream.getvalue())
+    # 代码：生成一张图片，在图片中写文件
+    # request.session['CheckCode'] =  图片上的内容
+    # 自动生成图片，并且将图片中的文字保存在session中
+    # 将图片内容返回给用户
 
 #登录逻辑
 def login(requests):
@@ -24,6 +41,8 @@ def login(requests):
         user_id = requests.session.get('user')
         return redirect('/result/')
     if requests.method=="POST":
+        input_code = requests.POST.get('check_code')
+        print(input_code)
         login_form=forms.UserForm(requests.POST)
         message="请检查填写的内容！"
         if login_form.is_valid():
@@ -43,7 +62,12 @@ def login(requests):
                 requests.session['email']=user.email
                 requests.session['des']=user.description
                 requests.session['job'] = user.job
-                redirect("/index/")
+
+                if requests.session['CheckCode'].upper()==input_code:
+                    redirect("/index/")
+                else:
+                    message="验证码错误,请从新输入"
+                    return render(requests, 'login/login.html', locals())
             else:
                 message='密码错误'
                 return render(requests,'login/login.html',locals())
