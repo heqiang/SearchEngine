@@ -14,6 +14,7 @@ from datetime import datetime
 import io
 from backend import check_code as CheckCode
 
+
 db = pymysql.connect("localhost","root","1422127065","bishe" ,charset="utf8" )
 cursor = db.cursor()
 client=Elasticsearch(hosts=["127.0.0.1"])
@@ -41,8 +42,7 @@ def login(requests):
         user_id = requests.session.get('user')
         return redirect('/result/')
     if requests.method=="POST":
-        input_code = requests.POST.get('check_code')
-        print(input_code)
+        input_code = requests.POST.get('check_code').upper()
         login_form=forms.UserForm(requests.POST)
         message="请检查填写的内容！"
         if login_form.is_valid():
@@ -64,7 +64,73 @@ def login(requests):
                 requests.session['job'] = user.job
 
                 if requests.session['CheckCode'].upper()==input_code:
-                    redirect("/index/")
+                    res = models.Hot_search.objects.values("Hot_searchtitle", "Hot_searchtime").order_by(
+                        "-Hot_searchtime")
+                    if res:
+                        key_words = res[0]['Hot_searchtitle']
+                    es_category = requests.GET.get('s_type', '')
+                    page = requests.GET.get("p", "2")
+                    try:
+                        page = int(page)
+                    except:
+                        page = 1
+                    start_time = datetime.now()
+                    response = client.search(
+                        index="{0}".format(es_category),
+                        body={
+                            "query": {
+                                "multi_match": {
+                                    "query": key_words,
+                                    "fields": ["title^3", "tags", "content"]
+                                }
+                            },
+                            "from": (page - 1) * 10,  # 从多少条开始获取
+                            "size": 10,  # 获取多少条数据
+                            "highlight": {  # 查询关键词高亮处理
+                                # 样式控制
+                                "pre_tags": ['<span class="keyWord">'],  # 高亮开始标签
+                                "post_tags": ['</span>'],  # 高亮结束标签
+                                "fields": {  # 高亮设置
+                                    "title": {},  # 高亮字段
+                                    "content": {}  # 高亮字段
+                                }
+                            }
+                        }
+                    )
+                    end_time = datetime.now()
+                    last_seconds = (end_time - start_time).total_seconds()
+                    total_nums = response["hits"]["total"]  # 返回总的条数
+                    if total_nums > 10:
+                        page_nums = int(total_nums / 10) + 1
+                    else:
+                        page_nums = int(total_nums / 10)
+                    all_list = []
+                    # 10条
+                    for hit in response["hits"]["hits"]:
+                        hit_dict = {}
+                        if "highlight" in hit:
+                            if "title" in hit["highlight"]:
+                                hit_dict["title"] = "".join(hit["highlight"]["title"])
+                            else:
+                                hit_dict["title"] = ''.join(hit["_source"]["title"])
+                            if "content" in hit["highlight"]:
+                                hit_dict["content"] = "".join(hit["highlight"]["content"][:500])
+                            else:
+                                hit_dict["content"] = "".join(hit["_source"]["content"][:500])
+                            hit_dict["time"] = hit['_source']["time"]
+                            hit_dict["url"] = hit['_source']["link_url"]
+                            hit_dict["score"] = hit["_score"]
+                            hit_dict["source"] = hit['_source']["source"]
+                            # 将内容加入到list
+                            all_list.append(hit_dict)
+                    return render(requests, "result.html", {"all_list": all_list,
+                                                            "key_words": key_words,
+                                                            "total_nums": total_nums,  # 数据总条数
+                                                            "page": page,  # 当前页码
+                                                            "page_nums": page_nums,  # 页数
+                                                            "last_seconds": last_seconds,
+                                                            # "topn_search": new_topn_search,
+                                                            })
                 else:
                     message="验证码错误,请从新输入"
                     return render(requests, 'login/login.html', locals())
@@ -81,6 +147,7 @@ def register(request):
         return redirect('/index/')
 
     if request.method == 'POST':
+        input_code = request.POST.get('check_code').upper()
         register_form = forms.RegisterForm(request.POST)
         message = "请检查填写的内容！"
         if register_form.is_valid():
@@ -103,17 +170,21 @@ def register(request):
                 if same_email_user:
                     message = '该邮箱已经被注册了！'
                     return render(request, 'login/register.html', locals())
+                if request.session['CheckCode'].upper()==input_code:
+                        new_user = models.User()
+                        new_user.username = username
+                        new_user.password = hashlib.sha1(password1.encode('utf-8')).hexdigest()
+                        new_user.email = email
+                        new_user.sex = sex
+                        new_user.job=job
+                        new_user.description=destription
+                        new_user.save()
+                        message="注册成功"
+                        return redirect('/login/',locals())
+                else:
+                    message='验证码输入错误'
+                    return render(request, 'login/register.html', locals())
 
-                new_user = models.User()
-                new_user.username = username
-                new_user.password = hashlib.sha1(password1.encode('utf-8')).hexdigest()
-                new_user.email = email
-                new_user.sex = sex
-                new_user.job=job
-                new_user.description=destription
-                new_user.save()
-                message="注册成功"
-                return redirect('/login/',locals())
         else:
             return render(request, 'login/register.html', locals())
     register_form = forms.RegisterForm()
@@ -125,7 +196,6 @@ def logout(requests):
     #     return redirect('/index/')
     requests.session.flush()
     res = models.Hot_search.objects.values("Hot_searchtitle", "Hot_searchtime").order_by("-Hot_searchtime")
-    print(res)
     if res:
         key_words = res[0]['Hot_searchtitle']
     es_category = requests.GET.get('s_type', '')
@@ -265,24 +335,43 @@ def personData(requests):
         Search_count = models.Search.objects.filter(user_id=id).count()
 
         head_imgpath=models.User.objects.filter(id=id).values("headimg")[0]['headimg']
-        return render(requests,"Personal/personData.html",{"head_imgpath":"../"+head_imgpath,
-                                                           "collect_count":collect_count,
-                                                           "Search_count":Search_count
-                                                           })
+        if head_imgpath:
+            return render(requests, "Personal/personData.html", {"head_imgpath": "../" + head_imgpath,
+                                                                 "collect_count": collect_count,
+                                                                 "Search_count": Search_count
+                                                                 })
+        else:
+            head_imgpath = 'https://uploadfile.huiyi8.com/up/51/3d/68/513d68ffef5924fc8e4309f4681be484.jpg'
+            return render(requests, "Personal/personData.html", {"head_imgpath": head_imgpath,
+                                                                 "collect_count": collect_count,
+                                                                 "Search_count": Search_count
+                                                                 })
+
     else:
         return redirect("/login/")
 
 def collection(requests):
     id = requests.session.get('user_id')
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
-    return render(requests,"Personal/collection.html",{"head_imgpath":"../"+head_imgpath})
+    if head_imgpath:
+        return render(requests, "Personal/collection.html", {"head_imgpath": "../" + head_imgpath})
+    else:
+        head_imgpath='https://uploadfile.huiyi8.com/up/51/3d/68/513d68ffef5924fc8e4309f4681be484.jpg'
+        return render(requests, "Personal/collection.html", {"head_imgpath": head_imgpath})
+
+
 def searchHistory(requests):
     id = requests.session.get('user_id')
     head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
-    return render(requests,"Personal/searchHistory.html",{"head_imgpath":"../"+head_imgpath})
+    if head_imgpath:
+        return render(requests, "Personal/searchHistory.html", {"head_imgpath": "../" + head_imgpath})
+    else:
+        head_imgpath = 'https://uploadfile.huiyi8.com/up/51/3d/68/513d68ffef5924fc8e4309f4681be484.jpg'
+        return render(requests, "Personal/searchHistory.html", {"head_imgpath": head_imgpath})
+
 def dataAnalysis(requests):
     id = requests.session.get('user_id')
-    head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+
     search_title=models.Search.objects.filter(user_id=id).values("searchtitle")
     hot_search=models.Hot_search.objects.all().values("Hot_searchtitle")
 
@@ -317,14 +406,28 @@ def dataAnalysis(requests):
         hotsearch_num.append(x[1])
     mysearch= my_search.most_common(1)[0][0]
     hot_reaearch=hot_search.most_common(1)[0][0]
+    head_imgpath = models.User.objects.filter(id=id).values("headimg")[0]['headimg']
+    if head_imgpath:
+        return render(requests, "Personal/dataAnalysis.html",
+                      {"head_imgpath": "../" + head_imgpath, "mysearch_cate": mysearch_cate,
+                       "mysearch_num": mysearch_num,
+                       "hotsearch_cate": hotsearch_cate,
+                       "hotsearch_num": hotsearch_num,
+                       "mysearch": mysearch,
+                       "hot_reaearch": hot_reaearch
+                       })
+    else:
+        #设置默认头像
+        head_imgpath = 'https://uploadfile.huiyi8.com/up/51/3d/68/513d68ffef5924fc8e4309f4681be484.jpg'
+        return render(requests, "Personal/dataAnalysis.html",
+                      {"head_imgpath": head_imgpath, "mysearch_cate": mysearch_cate,
+                       "mysearch_num": mysearch_num,
+                       "hotsearch_cate": hotsearch_cate,
+                       "hotsearch_num": hotsearch_num,
+                       "mysearch": mysearch,
+                       "hot_reaearch": hot_reaearch
+                       })
 
-    return render(requests,"Personal/dataAnalysis.html",{"head_imgpath":"../"+head_imgpath,"mysearch_cate":mysearch_cate,
-                                                         "mysearch_num":mysearch_num,
-                                                         "hotsearch_cate":hotsearch_cate,
-                                                         "hotsearch_num":hotsearch_num,
-                                                         "mysearch":mysearch,
-                                                         "hot_reaearch":hot_reaearch
-                                                         })
 
 def collection_article(requests):
     if requests.session.get('is_login', None):

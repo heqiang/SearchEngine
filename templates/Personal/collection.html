@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        {% load static %}
         {% load staticfiles %}
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,7 +18,7 @@
                 </li>
 
                     <li class="layui-nav-item">
-                        <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
+                             <a href=""><img src='{{head_imgpath}}' class="layui-nav-img">欢迎：{{ request.session.user_name }}</a>
                     </li>
 
                     <li class="layui-nav-item">

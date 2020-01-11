@@ -17,7 +17,7 @@ class  User(models.Model):
     job=models.CharField(max_length=128,blank=True)
     description=models.TextField(blank=True)
     createtime=models.DateTimeField(auto_now_add=True)
-    headimg=models.ImageField(upload_to="headimg",blank=True)
+    headimg=models.ImageField(upload_to="headimg",blank=True,default='media/head.jpg')
 
 class  Collect(models.Model):
     user=models.ForeignKey('User',on_delete=models.CASCADE)

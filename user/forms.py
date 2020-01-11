@@ -6,7 +6,7 @@ class UserForm(forms.Form):
         attrs={'class': 'form-control', 'placeholder': "Username",'autofocus': ''}))
     password=forms.CharField(label="密码",max_length=256,widget=forms.PasswordInput(
         attrs={'class': 'form-control','placeholder': "Password"}))
-    captcha = CaptchaField(label='验证码')
+    # captcha = CaptchaField(label='验证码')
 class RegisterForm(forms.Form):
     gender=(
         ('male',"男"),
@@ -23,4 +23,4 @@ class RegisterForm(forms.Form):
     sex = forms.ChoiceField(label='性别',choices=gender)
     job=forms.CharField(label="job",widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "job", 'autofocus': ''}))
     description=forms.CharField(label="简介",widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': "简介"}))
-    captcha = CaptchaField(label='验证码')
+    # captcha = CaptchaField(label='验证码')
