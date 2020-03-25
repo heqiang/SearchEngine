@@ -20,7 +20,6 @@ class SegmentfaultSpider(scrapy.Spider):
     allowed_domains = ['segmentfault.com']
     start_urls = ['https://segmentfault.com/blogs/newest?page=3200']
     # redis_key = "segmentfault.spider:start_urls"
-
     def parse(self, response):
          link_urls=response.xpath("//h2[@class='title blog-type-common blog-type-1']/a/@href").extract()
          for link_url in link_urls:

@@ -14,8 +14,6 @@ class  User(models.Model):
     password=models.CharField(max_length=255)
     email=models.EmailField(unique=True,blank=True)
     sex=models.CharField(max_length=32,choices=gender,default='男',blank=True)
-    job=models.CharField(max_length=128,blank=True)
-    description=models.TextField(blank=True)
     createtime=models.DateTimeField(auto_now_add=True)
     headimg=models.ImageField(upload_to="headimg",blank=True,default='media/head.jpg')
 

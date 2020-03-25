@@ -8,7 +8,6 @@ from scrapy.loader import ItemLoader
 import scrapy
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 import datetime
-# from ..Spider.models.es_article_types import ArticType
 from .models.es_article_types import ArticType
 from .models.Technology_types import TechnologyType
 from .models.Answer_type import AnswerType
@@ -21,13 +20,8 @@ from .utils.common import get_md5
 redis_cli=redis.StrictRedis()
 def gen_suggest(index, info_tuple):
     # 根据字符串生成搜索建议数组
-    """Hell0STN
-    此函数主要用于,连接elasticsearch(搜索引擎)，使用ik_max_word分词器，将传入的字符串进行分词，返回分词后的结果
-    此函数需要两个参数：
-    第一个参数：要调用elasticsearch(搜索引擎)分词的索引index，一般是（索引操作类._doc_type.index）
-    第二个参数：是一个元组，元祖的元素也是元组，元素元祖里有两个值一个是要分词的字符串，第二个是分词的权重，多个分词传多个元祖如下
-    书写格式：
-    gen_suggest(lagouType._doc_type.index, (('字符串', 10),('字符串', 8)))
+    """
+    @author ：hq
     """# 连接elasticsearch(搜索引擎)，使用操作搜索引擎的类下面的_doc_type.using连接
     es = connections.create_connection(TechnologyType._doc_type.using)
     used_words = set()
@@ -43,23 +37,18 @@ def gen_suggest(index, info_tuple):
         if new_words:
             suggests.append({"input":list(new_words), "weight":weight})
     return suggests
-
 def item_create_date(value):
     try:
         create_data = datetime.datetime.strptime(value, "%Y/%m/%d").date()
     except Exception as e:
         create_data = datetime.datetime.now().date()
     return create_data
-
-
 def get_praise_num(value):
     if len(value[0].strip()) == 0 or value is None:
         value = 0
     else:
         value = value
     return value
-
-
 def get_num(value):
     strip_1 = value.strip()
     split_2 = strip_1.split(" ")
@@ -68,8 +57,6 @@ def get_num(value):
         return "0"
     print(split_3)
     return split_3
-
-
 def remove_comment(value):
     if '评论' in value:
         return ''
@@ -337,7 +324,6 @@ class Aliyun_tec(scrapy.Field):
     link_url=scrapy.Field()
     url_object_id = scrapy.Field()
     source = scrapy.Field()
-
     def save_artic_to_es(self):
         Tec_article = TechnologyType()
         Tec_article.title = self['title']

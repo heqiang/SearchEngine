@@ -191,12 +191,7 @@
 										<li><span>邮箱：</span>
 											<div class="person_data_info">{{ request.session.email }}</div>
 										</li>
-                                        <li><span>工作：</span>
-											<div class="person_data_info">{{ request.session.job }}</div>
-										</li>
-										<li><span>简介：</span>
-											<div class="person_data_desc">{{ request.session.des }}</div>
-										</li>
+
 									</ul>
 								</div>
 							</div>
@@ -244,18 +239,7 @@
 						<input class="layui-input" type="email" name="email" lay-verify="email|required" placeholder="{{ request.session.email }}" autocomplete="off">
 					</div>
 				</div>
-                <div class="layui-form-item">
-					<label class="layui-form-label">工作:</label>
-					<div class="layui-input-block">
-						<input class="layui-input" type="text" name="job" lay-verify="required" placeholder="{{ request.session.job }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">简介:</label>
-					<div class="layui-input-block">
-						<textarea style="width:300px;height:100px;" name="desc" lay-verify="required" placeholder="{{ request.session.des}}"></textarea>
-					</div>
-				</div>
+
 				<div class="layui-form-item">
 					<div class="layui-input-block edit-submit">
 						<button class="layui-btn" lay-submit lay-filter="editBut">立即提交</button>

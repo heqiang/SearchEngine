@@ -8,6 +8,7 @@ html{*overflow:auto;}
 /*nav样式*/
 .nav{margin-bottom:10px;}
 .searchList{float:left;padding-left:5px;}
+.searchList{float:left;padding-left:5px;}
 .searchList .searchItem{float:left;margin-right:15px;font-size:14px;padding:0 0 2px 2px;cursor:pointer;height:18px;}
 .searchList .searchItem.current{color:#0080cc;border-bottom:2px solid #9cc813;font-weight:bold;}
 

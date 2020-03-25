@@ -1,8 +1,6 @@
 <!DOCTYPE html >
 <html >
-
 {% load staticfiles %}
-
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,24 +18,11 @@
         .foot table{
             display: inline-block;
         }
+
     </style>
 </head>
 <body>
 <div id="container">
-{#    <div class="nav">#}
-{#    	<ul class="searchList">#}
-{#            {% if request.session.is_login %}#}
-{#                  <li class="searchItem  login" ><a href="#">当前在线：{{ request.session.user_name }}</a></li>#}
-{#                  <li class="searchItem" ><a href="/logout/">登出</a></li>#}
-{#                  <li class="searchItem" ><a href="#">个人中心</a></li>#}
-{#                  <li><a  href="/function1/">图表展示</a></li>#}
-{#            {% else %}#}
-{#            <li class="searchItem login" ><a href="/login/">登录</a></li>#}
-{#            <li class="searchItem register" ><a href="/register/">注册</a></li>#}
-{##}
-{#            {% endif %}#}
-{#        </ul>#}
-{#    </div>#}
 	<div id="bd">
         <div id="main">
         	<h1 class="title">
@@ -45,9 +30,8 @@
             </h1>
             <div class="nav ue-clear">
             	<ul class="searchList">
-{#                    <li class="searchItem current" data-type="article">文章</li>#}
-{#                    <li class="searchItem" data-type="question">问答</li>#}
-{#                    <li class="searchItem" data-type="job">职位</li>#}
+                    <li class="searchItem current" data-type="article">文章</li>
+                    <li class="searchItem" data-type="question">问答</li>
                 </ul>
             </div>
             <div class="inputArea">
@@ -110,8 +94,6 @@
         }
       }
     }
-
-
     // 搜索建议
     $(function(){
         $('.searchInput').bind(' input propertychange ',function(){//绑定一个事件  当input发生变化的时候会发起一个请求
@@ -138,7 +120,6 @@
             });
         } );
     })
-
     hideElement($('.dataList'), $('.searchInput'));
 
 </script>
@@ -198,7 +179,6 @@
             searchArr.unshift(val)
         }
     }
-
 
 </script>
 </html>

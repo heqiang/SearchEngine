@@ -59,7 +59,7 @@ class TechnologyType(DocType):
     source = Keyword()  # 来源
 
     class Meta:
-        index = "technology"  # 必须小写
+        index = "technology"
         doc_type = "tec_articles"
 
 

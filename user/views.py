@@ -60,77 +60,11 @@ def login(requests):
                 requests.session['user_name']=user.username
                 requests.session['sex']=user.sex
                 requests.session['email']=user.email
-                requests.session['des']=user.description
-                requests.session['job'] = user.job
 
                 if requests.session['CheckCode'].upper()==input_code:
-                    res = models.Hot_search.objects.values("Hot_searchtitle", "Hot_searchtime").order_by(
-                        "-Hot_searchtime")
-                    if res:
-                        key_words = res[0]['Hot_searchtitle']
-                    es_category = requests.GET.get('s_type', '')
-                    page = requests.GET.get("p", "2")
-                    try:
-                        page = int(page)
-                    except:
-                        page = 1
-                    start_time = datetime.now()
-                    response = client.search(
-                        index="{0}".format(es_category),
-                        body={
-                            "query": {
-                                "multi_match": {
-                                    "query": key_words,
-                                    "fields": ["title^3", "tags", "content"]
-                                }
-                            },
-                            "from": (page - 1) * 10,  # 从多少条开始获取
-                            "size": 10,  # 获取多少条数据
-                            "highlight": {  # 查询关键词高亮处理
-                                # 样式控制
-                                "pre_tags": ['<span class="keyWord">'],  # 高亮开始标签
-                                "post_tags": ['</span>'],  # 高亮结束标签
-                                "fields": {  # 高亮设置
-                                    "title": {},  # 高亮字段
-                                    "content": {}  # 高亮字段
-                                }
-                            }
-                        }
-                    )
-                    end_time = datetime.now()
-                    last_seconds = (end_time - start_time).total_seconds()
-                    total_nums = response["hits"]["total"]  # 返回总的条数
-                    if total_nums > 10:
-                        page_nums = int(total_nums / 10) + 1
-                    else:
-                        page_nums = int(total_nums / 10)
-                    all_list = []
-                    # 10条
-                    for hit in response["hits"]["hits"]:
-                        hit_dict = {}
-                        if "highlight" in hit:
-                            if "title" in hit["highlight"]:
-                                hit_dict["title"] = "".join(hit["highlight"]["title"])
-                            else:
-                                hit_dict["title"] = ''.join(hit["_source"]["title"])
-                            if "content" in hit["highlight"]:
-                                hit_dict["content"] = "".join(hit["highlight"]["content"][:500])
-                            else:
-                                hit_dict["content"] = "".join(hit["_source"]["content"][:500])
-                            hit_dict["time"] = hit['_source']["time"]
-                            hit_dict["url"] = hit['_source']["link_url"]
-                            hit_dict["score"] = hit["_score"]
-                            hit_dict["source"] = hit['_source']["source"]
-                            # 将内容加入到list
-                            all_list.append(hit_dict)
-                    return render(requests, "result.html", {"all_list": all_list,
-                                                            "key_words": key_words,
-                                                            "total_nums": total_nums,  # 数据总条数
-                                                            "page": page,  # 当前页码
-                                                            "page_nums": page_nums,  # 页数
-                                                            "last_seconds": last_seconds,
-                                                            # "topn_search": new_topn_search,
-                                                            })
+
+                    return render(requests, "Personal/personData.html" )
+
                 else:
                     message="验证码错误,请从新输入"
                     return render(requests, 'login/login.html', locals())
@@ -145,7 +79,6 @@ def login(requests):
 def register(request):
     if request.session.get('is_login', None):
         return redirect('/index/')
-
     if request.method == 'POST':
         input_code = request.POST.get('check_code').upper()
         register_form = forms.RegisterForm(request.POST)
@@ -156,8 +89,6 @@ def register(request):
             password2 = register_form.cleaned_data.get('password2')
             email = register_form.cleaned_data.get('email')
             sex = register_form.cleaned_data.get('sex')
-            job=register_form.cleaned_data.get('job')
-            destription=register_form.cleaned_data.get("description")
             if password1 != password2:
                 message = '两次输入的密码不同！'
                 return render(request, 'login/register.html', locals())
@@ -176,8 +107,6 @@ def register(request):
                         new_user.password = hashlib.sha1(password1.encode('utf-8')).hexdigest()
                         new_user.email = email
                         new_user.sex = sex
-                        new_user.job=job
-                        new_user.description=destription
                         new_user.save()
                         message="注册成功"
                         return redirect('/login/',locals())
@@ -327,13 +256,12 @@ def  upload(requests):
 
 
 
-#路由控制
+#个人资料
 def personData(requests):
     if requests.session.get('is_login', None):
         id = requests.session.get('user_id')
         collect_count=models.Collect.objects.filter(user_id=id).count()
         Search_count = models.Search.objects.filter(user_id=id).count()
-
         head_imgpath=models.User.objects.filter(id=id).values("headimg")[0]['headimg']
         if head_imgpath:
             return render(requests, "Personal/personData.html", {"head_imgpath": "../" + head_imgpath,
@@ -438,16 +366,17 @@ def collection_article(requests):
             #去标签
             dr = re.compile(r'<[^>]+>', re.S)
             collecttitle = dr.sub('', collect_title)
+            print(collecttitle)
             #判断收藏的是否存在于数据库
             exist=models.Collect.objects.filter(user_id=id).values("collecturl")
             if exist:
                 if exist[0]['collecturl']==collect_url:
                     return JsonResponse({"status":"1"})
-                else:
-                    res=models.Collect.objects.create(user_id=id,collecturl=collect_url,collecttitle=collecttitle)
-                    if res:
+            else:
+                res=models.Collect.objects.create(user_id=id,collecturl=collect_url,collecttitle=collecttitle)
+                if res:
                         return JsonResponse({"status":'0'})
-                    else:
+                else:
                         return JsonResponse({"status":"1"})
     else:
         return JsonResponse({"status": '2'})

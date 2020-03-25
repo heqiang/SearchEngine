@@ -11,10 +11,8 @@ connections.create_connection(hosts=["localhost"])
 
 #使用Completion字段必须重写这个类,防止报错
 class CustomAnalyzer(_CustomAnalyzer):                                      # 自定义CustomAnalyzer类，来重写CustomAnalyzer类
-
     def get_analysis_definition(self):
         return {}
-
 ik_analyzer = CustomAnalyzer("ik_max_word", filter=["lowercase"])
 
 #映射数据类型

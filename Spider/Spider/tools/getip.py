@@ -3,21 +3,15 @@ from fake_useragent import UserAgent
 import requests
 from lxml import etree
 
-
 conn=pymysql.connect(
     host='localhost',
     user='root',
-    password='1422127065',
-    db='bishe',
+    password='password',
+    db='database',
     charset='utf8'
 )
-
 cursor=conn.cursor()
-
 ua=UserAgent()
-
-
-
 class GetIp(object):
     # 无效ip删除
     def delete(self, ip):

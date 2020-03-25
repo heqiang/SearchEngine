@@ -22,13 +22,10 @@ RETRY_ENABLED = True #设置开启重试
 RETRY_TIMES = 3 #设置重试次数
 
 DOWNLOADER_MIDDLEWARES = {
-   'Spider.middlewares.SpiderDownloaderMiddleware': None,
+   # 'Spider.middlewares.SpiderDownloaderMiddleware': None,
     'Spider.middlewares.Uamid': 300,
     'Spider.middlewares.RandomProxy':10
-
 }
-
-
 ITEM_PIPELINES = {
        'scrapy_redis.pipelines.RedisPipeline': 2,
         'Spider.pipelines.ElasticsearchPipeline': 4

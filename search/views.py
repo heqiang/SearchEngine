@@ -30,6 +30,10 @@ def Result(requests):
         res=models.Search.objects.filter(user_id=user_id).values("searchtitle","searchtime").order_by("-searchtime")
         if  res:
             key_words=res[0]['searchtitle']
+        else:
+            res = models.Hot_search.objects.values("Hot_searchtitle", "Hot_searchtime").order_by("-Hot_searchtime")
+            if res:
+                key_words = res[0]['Hot_searchtitle']
     else:
         res=models.Hot_search.objects.values("Hot_searchtitle","Hot_searchtime").order_by("-Hot_searchtime")
         if res:
@@ -108,8 +112,8 @@ def Result(requests):
                                            })
 
 
-
-def SearchSuggest(request):  # 搜索自动补全逻辑处理
+ # 搜索自动补全逻辑处理
+def SearchSuggest(request):
     es_category=request.GET.get('s_type','')
     if es_category=="question":
         key_words = request.GET.get('s', '')  # 获取到请求词
@@ -145,9 +149,7 @@ def SearchSuggest(request):  # 搜索自动补全逻辑处理
 
 def SearchView(request):
         es_category = request.GET.get('s_type', '')
-
         key_words=request.GET.get('q',"")
-
         if request.session.get('is_login',None):
             user_id=request.session.get('user_id')
             models.Search.objects.create(searchtitle=key_words,user_id=user_id)
@@ -160,6 +162,7 @@ def SearchView(request):
         for x  in topn_search:
             new_topn_search.append(x.decode(encoding='utf-8'))
         page = request.GET.get("p", "2")
+        page=str(int(page)+1)
         try:
             page = int(page)
         except:

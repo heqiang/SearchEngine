@@ -13,10 +13,7 @@ class CustomAnalyzer(_CustomAnalyzer):                                      # è‡
 
     def get_analysis_definition(self):
         return {}
-
 ik_analyzer = CustomAnalyzer("ik_max_word", filter=["lowercase"])
-
-
 class  TechnologyType(DocType):
      suggest=Completion(analyzer=ik_analyzer)
      title=Text(analyzer='ik_max_word')

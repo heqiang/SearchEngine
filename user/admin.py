@@ -10,7 +10,7 @@ class  MyAdminSite(admin.AdminSite):
 
 @admin.register(User)
 class  UserAdmin(admin.ModelAdmin):
-    list_display = ('username','sex','email','job','description','createtime')
+    list_display = ('username','sex','email','createtime')
     search_fields = ('username',)
 @admin.register(Collect)
 class  Collect(admin.ModelAdmin):

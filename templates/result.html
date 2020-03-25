@@ -1,13 +1,12 @@
-
 <!DOCTYPE html >
 <html >
 {% load staticfiles %}
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>python-lcv-search搜索引擎</title>
-<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
-<link href="{% static 'css/result.css' %}" rel="stylesheet" type="text/css" />
+    <title>python-lcv-search搜索引擎</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/result.css' %}" rel="stylesheet" type="text/css" />
     <style>
         .login{
         margin-left:900px;!important;
@@ -18,6 +17,9 @@
         .foot table{
             display: inline-block;
         }
+        .searchInput{
+            width: 1000px;
+        }
     </style>
 </head>
 <body>
@@ -27,12 +29,7 @@
         <div class="inputArea">
         	<input type="text" class="searchInput" value="{{ key_words }}"/>
             <input type="button" class="searchButton" onclick="add_search()"/>
-             <ul class="dataList" style="background: black ">
-                	<li>java</li>
-                    <li>linux</li>
-                    <li>python</li>
-                    <li>技术</li>
-                    <li>网站开发</li>
+             <ul class="dataList" style="background: white ">
                 </ul>
         </div>
     </div>
@@ -40,7 +37,6 @@
     	<ul class="searchList">
             <li class="searchItem current" data-type="article">文章</li>
             <li class="searchItem" data-type="answer">问答</li>
-{#            <li class="searchItem" data-type="job">职位</li>#}
             {% if request.session.is_login %}
                <li class="searchItem  login" ><a href="#">当前在线：{{ request.session.user_name }}</a></li>
                <li class="searchItem" ><a href="/logout/">注销</a></li>
@@ -83,10 +79,7 @@
                                  <a  href="{{ hit.url }}",target="_blank">...查看更多</a>
                             </div>
                             <div class="itemFoot">
-{#                                <span class="info">#}
-{#                                    <label>来源：</label>#}
-{#                                    <span class="value">{{hit.source}}</span>#}
-{#                                </span>#}
+
                                 <span class="info">
 {#                                    <label>发布时间：</label>#}
 {#                                    <span class="value">{{hit.time}}</span>#}
@@ -225,7 +218,8 @@
 		callback :pageselectCallback
 	});
 	function pageselectCallback(page_id, jq) {
-		window.location.href=search_url+'?q='+key_words+'&p='+page_id
+
+		window.location.href=search_url+'?q='+key_words+'&p='+(page_id+1)
 	}
 
 	setHeight();
@@ -280,7 +274,7 @@
     }
 
 
-    // 搜索建议
+   // 搜索建议
     $(function(){
         $('.searchInput').bind(' input propertychange ',function(){//绑定一个事件  当input发生变化的时候会发起一个请求
             var searchText = $(this).val();
@@ -291,10 +285,9 @@
                 dataType:'json',
                 url:suggest_url+"?s="+searchText+"&s_type="+$(".searchItem.current").attr('data-type'),
                 async: true,
-
                 success: function(data) {
+
                     for (var i=0;i<data.length;i++){
-                        console.log(data[i])
                         tmpHtml += '<li><a href="'+search_url+'?q='+data[i]+'">'+data[i]+'</a></li>'
                     }
                     $(".dataList").html("")
@@ -310,6 +303,7 @@
     })
 
     hideElement($('.dataList'), $('.searchInput'));
+
 
 </script>
 <script>
