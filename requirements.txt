@@ -1,4 +1,4 @@
-redis==3.2.1
+redis==4.5.3
 elasticsearch_dsl==5.1.0
 pandas==0.24.2
 requests==2.21.0
